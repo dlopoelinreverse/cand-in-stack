@@ -19,12 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`debug-screens bg-slate-100 text-zinc-700 ${inter.className}`}
+        className={`debug-screens bg-slate-100 text-zinc-700 h-screen ${inter.className}`}
       >
         <Providers>
           <Modals />
-          <Header />
-          {children}
+          <div className="container h-full mx-auto xl:px-20 mx-w-6xl">
+            <Header />
+            {children}
+          </div>
         </Providers>
       </body>
     </html>

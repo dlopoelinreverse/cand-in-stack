@@ -1,4 +1,4 @@
-import { getUserId } from "@/app/utils/getUserId";
+import { getUserId } from "@/utils/getUserId";
 import Link from "next/link";
 
 export default async function UserProfileIcon() {

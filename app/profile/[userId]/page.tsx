@@ -1,4 +1,4 @@
-import { isCurrentUser } from "@/app/utils/isCurrentUser";
+import { isCurrentUser } from "@/utils/isCurrentUser";
 
 export default async function UserProfile({
   params,
