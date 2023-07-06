@@ -3,18 +3,42 @@
 import { useState } from "react";
 import CustomButton from "../CustomButton";
 import TestModal from "../TestModal";
+import CustomModal from "../Modals/CustomModal";
+import { useModal } from "@/hooks/useModal";
+import TechnologiesFilterModal from "./TechnologiesFilterModal";
 
 const filters = [
-  { label: "Match" },
-  { label: "Technologies", filterComponentModal: <TestModal /> },
-  { label: "Villes", modalName: "cities" },
-  { label: "Dates", modalName: "dates" },
+  {
+    label: "Match",
+    filterComponentModal: <TestModal modalName="match" />,
+    modalName: "match",
+  },
+  {
+    label: "Technologies",
+    filterComponentModal: <TechnologiesFilterModal />,
+    modalName: "technologies",
+  },
+  {
+    label: "Villes",
+    filterComponentModal: <TestModal modalName="cities" />,
+    modalName: "cities",
+  },
+  {
+    label: "Dates",
+    filterComponentModal: <TestModal modalName="dates" />,
+    modalName: "dates",
+  },
 ];
 
 export default function Filters() {
-  const [filterComponentModal, setfilterComponentModal] =
-    useState<React.ReactNode>(null);
-  console.log(filterComponentModal);
+  const { modalOpen, onOpenModal, onCloseModal } = useModal();
+  const [modalName, setModalName] = useState("");
+  const filterBodyModal = filters
+    .filter((filter) => filter.modalName === modalName)
+    .map((filter) => filter.filterComponentModal);
+
+  const bodyModal = [...filterBodyModal];
+
   return (
     <div className="flex justify-center my-10">
       <div className="flex items-center justify-around w-8/12 h-20 rounded-3xl bg-slate-400">
@@ -25,13 +49,19 @@ export default function Filters() {
             large
             fullWidth
             additionnalStyle="mx-3"
-            onClick={() =>
-              setfilterComponentModal(filter?.filterComponentModal)
-            }
+            onClick={() => {
+              setModalName(filter.modalName);
+              onOpenModal();
+            }}
           />
         ))}
       </div>
-      {filterComponentModal}
+
+      <CustomModal
+        isOpen={modalOpen}
+        onClose={onCloseModal}
+        body={bodyModal[0]}
+      />
     </div>
   );
 }
