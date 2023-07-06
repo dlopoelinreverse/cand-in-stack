@@ -1,8 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
-import Header from "@/components/Header";
-import Modals from "@/components/Modals/Modals";
+import SideBar from "@/components/sideBar/SideBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,13 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`debug-screens bg-slate-100 text-zinc-700 h-screen ${inter.className}`}
+        className={`debug-screens bg-slate-100 text-zinc-700 h-screen overflow-hidden ${inter.className}`}
       >
         <Providers>
-          <Modals />
-          <div className="container h-full mx-auto xl:px-20 mx-w-6xl">
-            <Header />
-            {children}
+          <div className="flex w-full h-screen mx-auto">
+            <SideBar />
+            <div className="w-[70%] bg-slate-500">{children}</div>
           </div>
         </Providers>
       </body>
