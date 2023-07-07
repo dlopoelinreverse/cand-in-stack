@@ -1,12 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import CustomButton from "../CustomButton";
+import { useState } from "react";
 import TestModal from "../TestModal";
 import CustomModal from "../Modals/CustomModal";
 import { useModal } from "@/hooks/useModal";
 import TechnologiesFilterModal from "./TechnologiesFilterModal";
-import useFilter from "@/hooks/useFilter";
+import useFilters from "@/hooks/useFilters";
 
 const filterComponentModal = [
   {
@@ -29,8 +28,10 @@ const filterComponentModal = [
 
 export default function Filters() {
   const { modalOpen, onOpenModal, onCloseModal } = useModal();
-  const { filters, toggleFilters } = useFilter();
+  const { filters, toggleFilters } = useFilters();
   const [modalName, setModalName] = useState("");
+
+  // Get the apropriate modalComponent for the modalBody
   const filterBodyModal = filterComponentModal
     .filter((filter) => filter.modalName === modalName)
     .map((filter) => filter.filterComponentModal);

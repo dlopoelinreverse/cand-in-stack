@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useFilter() {
+export default function useFilters() {
   const [filters, setFilters] = useState([
     { filterId: "match", label: "Match", isActive: false },
     {
