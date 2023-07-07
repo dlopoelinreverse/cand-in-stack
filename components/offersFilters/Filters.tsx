@@ -1,59 +1,62 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CustomButton from "../CustomButton";
 import TestModal from "../TestModal";
 import CustomModal from "../Modals/CustomModal";
 import { useModal } from "@/hooks/useModal";
 import TechnologiesFilterModal from "./TechnologiesFilterModal";
+import useFilter from "@/hooks/useFilter";
 
-const filters = [
+const filterComponentModal = [
   {
-    label: "Match",
-    filterComponentModal: <TestModal modalName="match" />,
     modalName: "match",
+    filterComponentModal: <TestModal modalName="match" />,
   },
   {
-    label: "Technologies",
-    filterComponentModal: <TechnologiesFilterModal />,
     modalName: "technologies",
+    filterComponentModal: <TechnologiesFilterModal />,
   },
   {
-    label: "Villes",
-    filterComponentModal: <TestModal modalName="cities" />,
     modalName: "cities",
+    filterComponentModal: <TestModal modalName="cities" />,
   },
   {
-    label: "Dates",
-    filterComponentModal: <TestModal modalName="dates" />,
     modalName: "dates",
+    filterComponentModal: <TestModal modalName="dates" />,
   },
 ];
 
 export default function Filters() {
   const { modalOpen, onOpenModal, onCloseModal } = useModal();
+  const { filters, toggleFilters } = useFilter();
   const [modalName, setModalName] = useState("");
-  const filterBodyModal = filters
+  const filterBodyModal = filterComponentModal
     .filter((filter) => filter.modalName === modalName)
     .map((filter) => filter.filterComponentModal);
 
   const bodyModal = [...filterBodyModal];
 
+  const handleFilterClick = (filterId: string) => {
+    if (filterId === "match") return toggleFilters(filterId);
+    onOpenModal();
+    setModalName(filterId);
+  };
+
   return (
     <div className="flex justify-center my-10">
       <div className="flex items-center justify-around w-8/12 h-20 rounded-3xl bg-slate-400">
         {filters.map((filter) => (
-          <CustomButton
-            key={filter.label}
-            actionLabel={filter.label}
-            large
-            fullWidth
-            additionnalStyle="mx-3"
-            onClick={() => {
-              setModalName(filter.modalName);
-              onOpenModal();
-            }}
-          />
+          <button
+            key={filter.filterId}
+            // onClick={() => toggleFilters(filter.filterId)}
+            onClick={() => handleFilterClick(filter.filterId)}
+            className={`${
+              filter.isActive ? "bg-emerald-300" : "bg-slate-300"
+            } p-4`}
+          >
+            {filter.label}
+          </button>
         ))}
       </div>
 
