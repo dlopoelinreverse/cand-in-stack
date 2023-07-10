@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useFilters() {
+export default function useOffersFilter() {
   const [filters, setFilters] = useState([
     { filterId: "match", label: "Match", isActive: false },
     {

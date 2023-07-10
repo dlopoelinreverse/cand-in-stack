@@ -5,8 +5,9 @@ import TestModal from "../TestModal";
 import CustomModal from "../Modals/CustomModal";
 import { useModal } from "@/hooks/useModal";
 import TechnologiesFilterModal from "./TechnologiesFilterModal";
-import useFilters from "@/hooks/useFilters";
+import useFilters from "@/hooks/useOffersFilter";
 import useAuthentication from "@/hooks/useAuthentication";
+import axios from "axios";
 
 const filterComponentModal = [
   {
@@ -33,15 +34,6 @@ export default function Filters() {
   const [modalName, setModalName] = useState("");
 
   const { session, status, isConnected, signOut } = useAuthentication();
-
-  console.log(
-    "session : ",
-    session,
-    "status : ",
-    status,
-    "isConnected : ",
-    isConnected
-  );
 
   // Get the apropriate modalComponent for the modalBody
   const filterBodyModal = filterComponentModal

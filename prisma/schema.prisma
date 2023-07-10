@@ -23,6 +23,7 @@ model User {
 
   sessions Session[]
   accounts Account[]
+  offers Offer[]
 
 }
 
@@ -33,20 +34,44 @@ enum Role {
   SUPERADMIN
 }
 
+model Offer {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  creatorId String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  jobType String?
+  description String
+  technologiesIds String[] @db.ObjectId
+
+  user User @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  technology Technologie @relation(fields: [technologiesIds], references: [id], onDelete: Cascade)
+
+}
+
+
 model Technologie {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
   isValid Boolean @default(false)
+  addedBy String? @db.ObjectId
+  suggestedBy String? @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   categoryId String @db.ObjectId
 
+  offers Offer[]
   category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
 
 model Category {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
+  isValid Boolean @default(false)
+  addedBy String? @db.ObjectId
+  suggestedBy String? @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   technologies Technologie[]
 

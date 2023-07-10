@@ -1,8 +1,8 @@
 import { getUserId } from "@/utils/getUserId";
 import Login from "./Login";
 import User from "./User";
-import NavBar from "../NavBar";
 import Link from "next/link";
+import NavBarUserDispatchLinks from "../navBar/NavBarUserDispatchLinks";
 
 export default async function SideBar() {
   const isLoggedIn = await getUserId();
@@ -15,7 +15,7 @@ export default async function SideBar() {
           </div>
         </Link>
         <div className="mt-10">{isLoggedIn ? <User /> : <Login />}</div>
-        <NavBar />
+        <NavBarUserDispatchLinks />
       </div>
     </>
   );
