@@ -6,6 +6,7 @@ import React from "react";
 const basicLinks = [
   { href: "/", title: "Les Offres", targetSegment: null },
   { href: "/applies", title: "Mes Candidatures", targetSegment: "applies" },
+  { href: "/dashboard", title: "Dashboard", targetSegment: "dashboard" },
 ];
 
 const enterpriseLinks = [

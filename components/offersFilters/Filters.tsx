@@ -6,6 +6,7 @@ import CustomModal from "../Modals/CustomModal";
 import { useModal } from "@/hooks/useModal";
 import TechnologiesFilterModal from "./TechnologiesFilterModal";
 import useFilters from "@/hooks/useFilters";
+import useAuthentication from "@/hooks/useAuthentication";
 
 const filterComponentModal = [
   {
@@ -30,6 +31,17 @@ export default function Filters() {
   const { modalOpen, onOpenModal, onCloseModal } = useModal();
   const { filters, toggleFilters } = useFilters();
   const [modalName, setModalName] = useState("");
+
+  const { session, status, isConnected, signOut } = useAuthentication();
+
+  console.log(
+    "session : ",
+    session,
+    "status : ",
+    status,
+    "isConnected : ",
+    isConnected
+  );
 
   // Get the apropriate modalComponent for the modalBody
   const filterBodyModal = filterComponentModal
