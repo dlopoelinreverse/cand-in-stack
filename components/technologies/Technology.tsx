@@ -1,14 +1,27 @@
-import { prisma } from "@/app/libs/prismadb";
-import React from "react";
+import { Technologie } from "@/app/types/types";
+import React, { useState } from "react";
 
-export default async function Technology({
-  technologyId,
-}: {
-  technologyId: string;
-}) {
-  const technology = await prisma.technologie.findFirst({
-    where: { id: technologyId },
-  });
-  if (!technology) return;
-  return <div>{technology.name}</div>;
+interface TechnologyProps {
+  technology: Technologie;
+  onClick: (technologyId: string) => void;
+  typeAction: "adding" | "removing";
+}
+
+export default function Technology({
+  technology,
+  onClick,
+  typeAction,
+}: TechnologyProps) {
+  return (
+    <div
+      onClick={() => onClick(technology.id)}
+      className={`${typeAction === "adding" && "hover:bg-green-200"} ${
+        typeAction === "removing" && " hover:bg-red-200"
+      } transition cursor-pointer`}
+    >
+      {typeAction === "adding" && <span>+</span>}
+      {typeAction === "removing" && <span>x</span>}
+      <p>{technology.name}</p>
+    </div>
+  );
 }

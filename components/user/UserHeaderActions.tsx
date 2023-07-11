@@ -1,4 +1,4 @@
-import AuthButton from "../AuthButton";
+import AuthButton from "../authentication/AuthButton";
 import UserProfileIcon from "./UserProfileIcon";
 
 export default function UserHeaderActions() {

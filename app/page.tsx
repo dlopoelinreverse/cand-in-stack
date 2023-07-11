@@ -1,10 +1,10 @@
-import Header from "@/components/Header";
+import Header from "@/components/header/Header";
 import Filters from "@/components/offersFilters/Filters";
 
 export default function Home() {
   return (
-    <Header title="Les Offres">
-      <Filters />
-    </Header>
+    <div>
+      <h1>home page</h1> <Filters />
+    </div>
   );
 }

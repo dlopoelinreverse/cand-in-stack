@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Providers from "./providers";
 import SideBar from "@/components/sideBar/SideBar";
 import { useRouter } from "next/navigation";
+import Header from "@/components/header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`debug-screens bg-slate-100 text-zinc-700 h-screen overflow-hidden ${inter.className}`}
+        className={`debug-screens bg-slate-100 mx-36 h-screen overflow-hidden ${inter.className}`}
       >
         <Providers>
-          <div className="flex w-full h-screen mx-auto">
-            <SideBar />
-            <div className="w-[70%] bg-slate-500">{children}</div>
+          <div className="flex flex-col w-full h-screen mx-auto">
+            {/* <SideBar /> */}
+            <Header />
+            {children}
           </div>
         </Providers>
       </body>

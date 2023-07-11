@@ -1,4 +1,3 @@
-"use client";
 import useTechnology from "@/hooks/useTechnology";
 import React, { useState } from "react";
 import MyModal from "../Modals/MyModal";
@@ -6,9 +5,10 @@ import { useModal } from "@/hooks/useModal";
 import { Category, Technologie } from "@/app/types/types";
 import CategoryAccordion from "./CategoryAccordion";
 import Technology from "./Technology";
+import DisplayTechnologies from "./DisplayTechnologies";
 
 interface AddTechnologiesProps {
-  technologiesToAdd: (technologiesSelected: Technologie[]) => void;
+  technologiesToAdd: (technologiesSelected: string[]) => void;
 }
 
 export default function AddTechnologies({
@@ -22,31 +22,45 @@ export default function AddTechnologies({
   );
 
   const handleValidation = () => {
-    // technologiesToAdd(technologiesSelected);
+    technologiesToAdd(technologiesSelected);
   };
 
   const handleClick = (technologyId: string) => {
     setTechnologiesSelected((current) => {
+      if (current.includes(technologyId)) return [...current];
       return [...current, technologyId];
     });
   };
 
-  if (isCategoryLoading || isTechnoLoading) return <p>Loading...</p>;
+  const handleRemoveTechnology = (id: string) => {
+    setTechnologiesSelected((current) =>
+      current.filter((technologyId) => technologyId !== id)
+    );
+  };
   return (
     <>
-      {technologiesSelected.length > 0 &&
-        technologiesSelected.map((technologyId) => (
-          <Technology technologyId={technologyId} key={technologyId} />
-        ))}
-      <button onClick={onOpenModal}>
+      <DisplayTechnologies
+        typeAction="removing"
+        onClick={handleRemoveTechnology}
+        technologyIds={technologiesSelected}
+      />
+      <button
+        onClick={onOpenModal}
+        disabled={isCategoryLoading || isTechnoLoading}
+      >
         Ajouter{" "}
         {technologiesSelected.length > 0
           ? "/Modifier les technologies"
           : "des technologies"}
       </button>
       <MyModal isOpen={modalOpen} onClose={onCloseModal}>
-        <>
-          {categories.map((category: Category) => (
+        <div className="flex flex-col items-start mb-5 mx-36">
+          <DisplayTechnologies
+            typeAction="removing"
+            onClick={handleRemoveTechnology}
+            technologyIds={technologiesSelected}
+          />
+          {categories?.map((category: Category) => (
             <CategoryAccordion
               key={category.id}
               category={category}
@@ -59,7 +73,7 @@ export default function AddTechnologies({
           ))}
           <button onClick={handleValidation}>Valider</button>
           <button onClick={onCloseModal}>Anuler</button>
-        </>
+        </div>
       </MyModal>
     </>
   );
