@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import TestModal from "../TestModal";
-import CustomModal from "../Modals/CustomModal";
+import CustomModal from "../Customs/CustomModal";
 import { useModal } from "@/hooks/useModal";
 import TechnologiesFilterModal from "./TechnologiesFilterModal";
 import useFilters from "@/hooks/useOffersFilter";
@@ -12,7 +11,7 @@ import axios from "axios";
 const filterComponentModal = [
   {
     modalName: "match",
-    filterComponentModal: <TestModal modalName="match" />,
+    // filterComponentModal: <TestModal modalName="match" />,
   },
   {
     modalName: "technologies",
@@ -20,11 +19,11 @@ const filterComponentModal = [
   },
   {
     modalName: "cities",
-    filterComponentModal: <TestModal modalName="cities" />,
+    // filterComponentModal: <TestModal modalName="cities" />,
   },
   {
     modalName: "dates",
-    filterComponentModal: <TestModal modalName="dates" />,
+    // filterComponentModal: <TestModal modalName="dates" />,
   },
 ];
 

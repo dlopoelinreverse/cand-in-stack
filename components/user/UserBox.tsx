@@ -2,7 +2,6 @@ import { authOptions } from "@/utils/authOptions";
 import { getServerSession } from "next-auth";
 import AuthButton from "../authentication/AuthButton";
 import LogoutButton from "../authentication/LogoutButton";
-import Image from "next/image";
 import Link from "next/link";
 
 export default async function UserBox() {
