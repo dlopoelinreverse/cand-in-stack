@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import CustomModal from "../Customs/CustomModal";
 import { useModal } from "@/hooks/useModal";
 import TechnologiesFilterModal from "./TechnologiesFilterModal";
 import useFilters from "@/hooks/useOffersFilter";
@@ -63,12 +62,6 @@ export default function Filters() {
           </button>
         ))}
       </div>
-
-      <CustomModal
-        isOpen={modalOpen}
-        onClose={onCloseModal}
-        body={bodyModal[0]}
-      />
     </div>
   );
 }

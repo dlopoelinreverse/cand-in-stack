@@ -6,9 +6,10 @@ export type Offer = {
   updatedAt: Date;
   jobType: string | null;
   technologiesIds: string[];
+  description: string;
 };
 
-export type Technologie = {
+export type Technology = {
   id: string;
   name: string;
   isValid: boolean;

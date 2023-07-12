@@ -1,13 +1,13 @@
 "use client";
-import { Technologie } from "@/app/types/types";
+import { Technology } from "@/app/types/types";
 import useTechnology from "@/hooks/useTechnology";
 import React from "react";
-import Technology from "./Technology";
+import TechnologyBadge from "./TechnologyBadge";
 
 interface DisplayTechnologiesProps {
   technologyIds: string[];
-  onClick: (technologyId: string) => void;
-  typeAction: "adding" | "removing";
+  onClick?: (technologyId: string) => void;
+  typeAction?: "adding" | "removing";
 }
 
 export default function DisplayTechnologies({
@@ -16,20 +16,23 @@ export default function DisplayTechnologies({
   typeAction,
 }: DisplayTechnologiesProps) {
   const { technologies } = useTechnology();
+  const handleClick = (technologyId: string) => {
+    if (onClick) onClick(technologyId);
+  };
   return (
-    <div className="flex flex-wrap gap-3">
+    <ul className="flex flex-wrap justify-center gap-3 mx-auto max-w-[300px] min-h-12">
       {technologyIds.map((technologyId) => (
-        <Technology
-          onClick={() => onClick(technologyId)}
+        <TechnologyBadge
+          onClick={() => handleClick(technologyId)}
           technology={
-            technologies.filter(
-              (technology: Technologie) => technology.id === technologyId
+            technologies?.filter(
+              (technology: Technology) => technology.id === technologyId
             )[0]
           }
           typeAction={typeAction}
           key={technologyId}
         />
       ))}
-    </div>
+    </ul>
   );
 }

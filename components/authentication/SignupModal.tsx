@@ -1,7 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import React, { useState } from "react";
-import Button from "../Customs/Button";
+import Button from "../customs/Button";
 
 export default function SignupModal() {
   const [isFormDisabled, setIsFormDisabled] = useState(false);

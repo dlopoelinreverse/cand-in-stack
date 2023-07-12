@@ -1,8 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
-import SideBar from "@/components/sideBar/SideBar";
-import { useRouter } from "next/navigation";
 import Header from "@/components/header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,10 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`debug-screens bg-slate-100 mx-36 h-screen overflow-hidden ${inter.className}`}
+        className={`debug-screens bg-slate-100 h-full mx-36 ${inter.className}`}
       >
         <Providers>
-          <div className="flex flex-col w-full h-screen mx-auto">
+          <div className="flex flex-col w-full h-full mx-auto">
             {/* <SideBar /> */}
             <Header />
             {children}

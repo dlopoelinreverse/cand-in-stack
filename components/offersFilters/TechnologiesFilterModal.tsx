@@ -1,4 +1,4 @@
-import CustomButton from "../Customs/CustomButton";
+import CustomButton from "../customs/CustomButton";
 
 const fakeTechnos = [
   { id: "1", name: "React" },

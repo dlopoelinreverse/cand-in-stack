@@ -1,27 +1,27 @@
-import { Technologie } from "@/app/types/types";
-import React, { useState } from "react";
+import { Technology } from "@/app/types/types";
+import React from "react";
 
 interface TechnologyProps {
-  technology: Technologie;
+  technology: Technology;
   onClick: (technologyId: string) => void;
-  typeAction: "adding" | "removing";
+  typeAction?: "adding" | "removing";
 }
 
-export default function Technology({
+export default function TechnologyBadge({
   technology,
   onClick,
   typeAction,
 }: TechnologyProps) {
   return (
-    <div
+    <li
       onClick={() => onClick(technology.id)}
       className={`${typeAction === "adding" && "hover:bg-green-200"} ${
         typeAction === "removing" && " hover:bg-red-200"
-      } transition cursor-pointer`}
+      } transition cursor-pointer flex items-center gap-2 p-3 rounded-lg bg-slate-200`}
     >
       {typeAction === "adding" && <span>+</span>}
       {typeAction === "removing" && <span>x</span>}
-      <p>{technology.name}</p>
-    </div>
+      <p>{technology?.name}</p>
+    </li>
   );
 }

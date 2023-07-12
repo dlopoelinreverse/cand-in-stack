@@ -1,15 +1,13 @@
 import { Offer } from "@/app/types/types";
+import { OfferDataType } from "@/components/offers/AddOfferForm";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface addEnterpriseOffer {
   enterpriseId: string;
-  newOfferData: {
-    title: string;
-    creatorId: string;
-    jobType?: string | null;
-    technologiesIds: string[];
-  };
+  newOfferData: OfferDataType;
+  closeModal: () => void;
 }
 
 export default function useEnterpriseOffers(
@@ -17,6 +15,7 @@ export default function useEnterpriseOffers(
   offers?: Offer[]
 ) {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const getOffersByEnterpriseId = (enterpriseId: string) => {
     axios(`/api/offers/${enterpriseId}`).then((res) => res.data);
@@ -33,13 +32,22 @@ export default function useEnterpriseOffers(
   });
 
   const addEnterpriseOffer = useMutation({
-    mutationFn: ({ enterpriseId, newOfferData }: addEnterpriseOffer) => {
-      return axios.post(`/api/offers/${enterpriseId}/new`, newOfferData);
+    mutationFn: ({
+      enterpriseId,
+      newOfferData,
+      closeModal,
+    }: addEnterpriseOffer) => {
+      return axios
+        .post(`/api/offers/${enterpriseId}/new`, newOfferData)
+        .then(() => closeModal());
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([enterpriseId]);
+      queryClient.invalidateQueries({ queryKey: [enterpriseId] });
+      router.refresh();
     },
   });
+
+  console.log(enterpriseOffers);
 
   return { enterpriseOffers, isLoading, isError, addEnterpriseOffer };
 }

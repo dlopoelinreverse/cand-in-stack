@@ -17,8 +17,7 @@ export default async function CurrentEnterpriseOfferPage() {
     orderBy: { createdAt: "desc" },
   });
 
-  if (offers.length <= 0)
-    return <AddOfferForm enterpriseId={session.user.id} />;
+  console.log("CurrentEnterpriseOfferPage");
 
   return <OffersDisplay offers={offers} enterpriseId={session.user.id} />;
 }

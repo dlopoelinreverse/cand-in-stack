@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Button from "../Customs/Button";
+import Button from "../customs/Button";
 import { signIn } from "next-auth/react";
 
 export default function SigninModal() {

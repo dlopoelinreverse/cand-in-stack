@@ -1,6 +1,6 @@
 "use client";
 import { useModal } from "@/hooks/useModal";
-import Button from "../Customs/Button";
+import Button from "../customs/Button";
 import { useState } from "react";
 import MyModal from "../Modals/MyModal";
 import SignupModal from "./SignupModal";

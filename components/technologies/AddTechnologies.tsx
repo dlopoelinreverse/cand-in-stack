@@ -1,80 +1,96 @@
 import useTechnology from "@/hooks/useTechnology";
-import React, { useState } from "react";
+import React, { SetStateAction } from "react";
 import MyModal from "../Modals/MyModal";
 import { useModal } from "@/hooks/useModal";
-import { Category, Technologie } from "@/app/types/types";
+import { Category, Technology } from "@/app/types/types";
 import CategoryAccordion from "./CategoryAccordion";
-import Technology from "./Technology";
 import DisplayTechnologies from "./DisplayTechnologies";
+import Button from "../customs/Button";
+import { OfferDataType } from "../offers/AddOfferForm";
 
 interface AddTechnologiesProps {
-  technologiesToAdd: (technologiesSelected: string[]) => void;
+  technologiesIds: string[];
+  setTechnologiesOfferIds: React.Dispatch<SetStateAction<OfferDataType>>;
 }
 
 export default function AddTechnologies({
-  technologiesToAdd,
+  technologiesIds,
+  setTechnologiesOfferIds,
 }: AddTechnologiesProps) {
   const { modalOpen, onOpenModal, onCloseModal } = useModal();
   const { technologies, categories, isCategoryLoading, isTechnoLoading } =
     useTechnology();
-  const [technologiesSelected, setTechnologiesSelected] = useState<string[]>(
-    []
-  );
 
   const handleValidation = () => {
-    technologiesToAdd(technologiesSelected);
+    onCloseModal();
+  };
+  const handleCancel = () => {
+    onCloseModal();
   };
 
-  const handleClick = (technologyId: string) => {
-    setTechnologiesSelected((current) => {
-      if (current.includes(technologyId)) return [...current];
-      return [...current, technologyId];
+  const handleAddTechnology = (technologyId: string) => {
+    setTechnologiesOfferIds((current) => {
+      return {
+        ...current,
+        technologiesIds: current.technologiesIds.includes(technologyId)
+          ? [...current.technologiesIds]
+          : [...current.technologiesIds, technologyId],
+      };
     });
   };
 
-  const handleRemoveTechnology = (id: string) => {
-    setTechnologiesSelected((current) =>
-      current.filter((technologyId) => technologyId !== id)
-    );
+  const handleRemoveTechnology = (technologyId: string) => {
+    setTechnologiesOfferIds((current) => {
+      return {
+        ...current,
+        technologiesIds: current.technologiesIds.filter(
+          (id) => id !== technologyId
+        ),
+      };
+    });
   };
   return (
-    <>
+    <div className="mx-auto mt-3">
       <DisplayTechnologies
         typeAction="removing"
         onClick={handleRemoveTechnology}
-        technologyIds={technologiesSelected}
+        technologyIds={technologiesIds}
       />
-      <button
+      <Button
+        label={` Ajouter 
+        ${
+          technologiesIds.length > 0
+            ? "/Modifier les technologies"
+            : "des technologies"
+        }`}
         onClick={onOpenModal}
         disabled={isCategoryLoading || isTechnoLoading}
-      >
-        Ajouter{" "}
-        {technologiesSelected.length > 0
-          ? "/Modifier les technologies"
-          : "des technologies"}
-      </button>
+        additionalStyle="my-3"
+      />
       <MyModal isOpen={modalOpen} onClose={onCloseModal}>
-        <div className="flex flex-col items-start mb-5 mx-36">
+        <div className="flex flex-col items-start mx-auto mb-5">
           <DisplayTechnologies
             typeAction="removing"
             onClick={handleRemoveTechnology}
-            technologyIds={technologiesSelected}
+            technologyIds={technologiesIds}
           />
           {categories?.map((category: Category) => (
             <CategoryAccordion
               key={category.id}
               category={category}
-              technologies={technologies.filter(
-                (technology: Technologie) =>
+              technologies={technologies?.filter(
+                (technology: Technology) =>
                   technology.categoryId === category.id
               )}
-              onClick={handleClick}
+              onClick={handleAddTechnology}
             />
           ))}
-          <button onClick={handleValidation}>Valider</button>
-          <button onClick={onCloseModal}>Anuler</button>
+          <div className="flex justify-center gap-5 mx-auto ">
+            <Button label="Valider" onClick={handleValidation} />
+            <Button label="Annuler" onClick={handleCancel} />
+          </div>
         </div>
       </MyModal>
-    </>
+    </div>
   );
 }
