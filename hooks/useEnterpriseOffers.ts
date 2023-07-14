@@ -44,6 +44,7 @@ export default function useEnterpriseOffers(
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [enterpriseId] });
+      queryClient.invalidateQueries({ queryKey: ["allOffers"] });
       router.refresh();
     },
   });

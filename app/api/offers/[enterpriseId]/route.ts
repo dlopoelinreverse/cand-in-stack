@@ -37,8 +37,9 @@ export const GET = async (
     });
 
     if (enterpriseOffers.length <= 0)
-      return new NextResponse("No offers find for this enterprise", {
+      return new NextResponse(JSON.stringify([]), {
         status: 200,
+        statusText: "No offers find for this enterprise",
       });
     return new NextResponse(JSON.stringify(enterpriseOffers), { status: 200 });
   } catch (error) {

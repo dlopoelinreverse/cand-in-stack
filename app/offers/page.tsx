@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
 import { prisma } from "../libs/prismadb";
-import AddOfferForm from "@/components/offers/AddOfferForm";
 import OffersDisplay from "@/components/offers/OffersDisplay";
 
 export default async function CurrentEnterpriseOfferPage() {
@@ -16,8 +15,6 @@ export default async function CurrentEnterpriseOfferPage() {
     take: 10,
     orderBy: { createdAt: "desc" },
   });
-
-  console.log("CurrentEnterpriseOfferPage");
 
   return <OffersDisplay offers={offers} enterpriseId={session.user.id} />;
 }

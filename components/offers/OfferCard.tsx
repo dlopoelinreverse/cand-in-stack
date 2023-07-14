@@ -1,5 +1,6 @@
 import { Offer } from "@/app/types/types";
 import DisplayTechnologies from "../technologies/DisplayTechnologies";
+import OfferAction from "./OfferAction";
 
 interface OfferCardProps {
   offer?: Offer;
@@ -16,6 +17,7 @@ export default function OfferCard({ offer, children }: OfferCardProps) {
           <h3>{offer.title}</h3>
           <DisplayTechnologies technologyIds={offer.technologiesIds} />
           <p>{offer.description}</p>
+          <OfferAction offer={offer} />
         </>
       )}
     </li>

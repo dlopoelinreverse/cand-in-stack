@@ -24,7 +24,7 @@ export default function RootLayout({
           <div className="flex flex-col w-full h-full mx-auto">
             {/* <SideBar /> */}
             <Header />
-            {children}
+            <main>{children}</main>
           </div>
         </Providers>
       </body>

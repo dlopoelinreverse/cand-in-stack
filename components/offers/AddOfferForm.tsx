@@ -25,20 +25,16 @@ export default function AddOfferForm({
       technologiesIds: technologiesOffer,
       description: String(description),
     };
-    console.log(newOfferData);
     addEnterpriseOffer.mutate({
       enterpriseId,
       newOfferData,
       closeModal: onCloseModal,
     });
   };
-  console.log("render");
+
   return (
     <>
-      <div
-        //  className="flex flex-col items-center justify-center w-full h-full "
-        className="flex flex-col items-center justify-center "
-      >
+      <div className="flex flex-col items-center justify-center ">
         <h3>Ajouter une offre</h3>
         <button
           onClick={onOpenModal}
@@ -58,8 +54,6 @@ export default function AddOfferForm({
               placeholder="Titre de l'offre"
             />
             <AddTechnologies
-              // technologiesIds={offerData.technologiesIds}
-              // setTechnologiesOfferIds={setOfferData}
               technologiesIds={technologiesOffer}
               setTechnologiesOfferIds={setTechnologiesOffer}
             />

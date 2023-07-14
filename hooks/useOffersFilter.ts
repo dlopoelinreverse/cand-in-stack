@@ -14,8 +14,8 @@ export default function useOffersFilter() {
   ]);
 
   const toggleFilters = (filterId: string) => {
-    setFilters((prevState) =>
-      prevState.map((filter) => {
+    setFilters((current) =>
+      current.map((filter) => {
         if (filter.filterId === filterId) {
           return { ...filter, isActive: !filter.isActive };
         }

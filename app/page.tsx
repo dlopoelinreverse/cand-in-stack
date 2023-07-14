@@ -1,10 +1,16 @@
-import Header from "@/components/header/Header";
+import OffersDisplay from "@/components/offers/OffersDisplay";
 import Filters from "@/components/offersFilters/Filters";
+import { prisma } from "./libs/prismadb";
 
-export default function Home() {
+export default async function Home() {
+  const offers = await prisma.offer.findMany({
+    take: 10,
+    orderBy: { createdAt: "desc" },
+  });
   return (
     <div>
-      <h1>home page</h1> <Filters />
+      <Filters />
+      <OffersDisplay offers={offers} />
     </div>
   );
 }
