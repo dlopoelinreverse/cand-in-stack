@@ -6,11 +6,10 @@ import { Category, Technology } from "@/app/types/types";
 import CategoryAccordion from "./CategoryAccordion";
 import DisplayTechnologies from "./DisplayTechnologies";
 import Button from "../customs/Button";
-import { OfferDataType } from "../offers/AddOfferForm";
 
 interface AddTechnologiesProps {
   technologiesIds: string[];
-  setTechnologiesOfferIds: React.Dispatch<SetStateAction<OfferDataType>>;
+  setTechnologiesOfferIds: React.Dispatch<SetStateAction<string[]>>;
 }
 
 export default function AddTechnologies({
@@ -29,25 +28,15 @@ export default function AddTechnologies({
   };
 
   const handleAddTechnology = (technologyId: string) => {
-    setTechnologiesOfferIds((current) => {
-      return {
-        ...current,
-        technologiesIds: current.technologiesIds.includes(technologyId)
-          ? [...current.technologiesIds]
-          : [...current.technologiesIds, technologyId],
-      };
-    });
+    setTechnologiesOfferIds((current) =>
+      current.includes(technologyId) ? [...current] : [...current, technologyId]
+    );
   };
 
   const handleRemoveTechnology = (technologyId: string) => {
-    setTechnologiesOfferIds((current) => {
-      return {
-        ...current,
-        technologiesIds: current.technologiesIds.filter(
-          (id) => id !== technologyId
-        ),
-      };
-    });
+    setTechnologiesOfferIds((current) =>
+      current.filter((id) => id !== technologyId)
+    );
   };
   return (
     <div className="mx-auto mt-3">

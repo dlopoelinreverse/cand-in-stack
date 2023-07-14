@@ -5,13 +5,6 @@ import MyModal from "../Modals/MyModal";
 import AddTechnologies from "../technologies/AddTechnologies";
 import React, { useState } from "react";
 import Button from "../customs/Button";
-import { useRouter } from "next/navigation";
-
-export type OfferDataType = {
-  title: string;
-  technologiesIds: string[];
-  description: string;
-};
 
 export default function AddOfferForm({
   enterpriseId,
@@ -20,22 +13,26 @@ export default function AddOfferForm({
 }) {
   const { addEnterpriseOffer } = useEnterpriseOffers(enterpriseId);
   const { modalOpen, onOpenModal, onCloseModal } = useModal();
-  const router = useRouter();
-  const [offerData, setOfferData] = useState<OfferDataType>({
-    title: "",
-    technologiesIds: [],
-    description: "",
-  });
+  const [technologiesOffer, setTechnologiesOffer] = useState<string[]>([]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const title = data.get("titleOffer");
+    const description = data.get("descriptionOffer");
+    const newOfferData = {
+      title: String(title),
+      technologiesIds: technologiesOffer,
+      description: String(description),
+    };
+    console.log(newOfferData);
     addEnterpriseOffer.mutate({
       enterpriseId,
-      newOfferData: offerData,
+      newOfferData,
       closeModal: onCloseModal,
     });
   };
-
+  console.log("render");
   return (
     <>
       <div
@@ -57,28 +54,20 @@ export default function AddOfferForm({
             <input
               type="text"
               id="title"
+              name="titleOffer"
               placeholder="Titre de l'offre"
-              value={offerData.title}
-              onChange={(event) =>
-                setOfferData((current) => {
-                  return { ...current, title: event.target.value };
-                })
-              }
             />
             <AddTechnologies
-              technologiesIds={offerData.technologiesIds}
-              setTechnologiesOfferIds={setOfferData}
+              // technologiesIds={offerData.technologiesIds}
+              // setTechnologiesOfferIds={setOfferData}
+              technologiesIds={technologiesOffer}
+              setTechnologiesOfferIds={setTechnologiesOffer}
             />
             <label htmlFor="description">Description de l&apos;offre</label>
             <textarea
               id="description"
+              name="descriptionOffer"
               className="resize-y min-h-[50px] max-h-32 my-3"
-              value={offerData.description}
-              onChange={(event) =>
-                setOfferData((current) => {
-                  return { ...current, description: event.target.value };
-                })
-              }
             />
             <Button
               label="Valider l'offre"

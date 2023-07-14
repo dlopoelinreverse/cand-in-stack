@@ -12,22 +12,17 @@ export default function OffersDisplay({
   offers: Offer[];
   enterpriseId: string;
 }) {
-  const {
-    enterpriseOffers: data,
-    isLoading,
-    isError,
-  } = useEnterpriseOffers(enterpriseId, offers);
+  const { enterpriseOffers, isLoading, isError } = useEnterpriseOffers(
+    enterpriseId,
+    offers
+  );
 
-  if (isLoading || !data) return <p>Is Loading</p>;
+  if (isLoading || !enterpriseOffers) return <p>Is Loading</p>;
 
   if (isError) return <p>Is Error</p>;
 
-  console.log(data);
-
-  const enterpriseOffers = data.data;
-
   return (
-    <ul className="flex flex-wrap items-start justify-start w-full h-full mx-auto">
+    <ul className="flex flex-wrap items-start justify-start w-full h-full gap-5 mx-auto mt-10">
       {!offers || offers.length <= 0 ? (
         <OfferCard>
           <AddOfferForm enterpriseId={enterpriseId} />

@@ -1,5 +1,4 @@
 import { Offer } from "@/app/types/types";
-import { OfferDataType } from "@/components/offers/AddOfferForm";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -10,6 +9,12 @@ interface addEnterpriseOffer {
   closeModal: () => void;
 }
 
+type OfferDataType = {
+  title: string;
+  technologiesIds: string[];
+  description: string;
+};
+
 export default function useEnterpriseOffers(
   enterpriseId: string,
   offers?: Offer[]
@@ -17,17 +22,13 @@ export default function useEnterpriseOffers(
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const getOffersByEnterpriseId = (enterpriseId: string) => {
-    axios(`/api/offers/${enterpriseId}`).then((res) => res.data);
-  };
-
   const {
     data: enterpriseOffers,
     isLoading,
     isError,
   } = useQuery<Offer[]>({
     queryKey: [enterpriseId],
-    queryFn: () => axios(`/api/offers/${enterpriseId}`),
+    queryFn: () => axios(`/api/offers/${enterpriseId}`).then((res) => res.data),
     initialData: offers,
   });
 
@@ -46,8 +47,6 @@ export default function useEnterpriseOffers(
       router.refresh();
     },
   });
-
-  console.log(enterpriseOffers);
 
   return { enterpriseOffers, isLoading, isError, addEnterpriseOffer };
 }

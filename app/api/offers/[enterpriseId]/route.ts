@@ -33,6 +33,7 @@ export const GET = async (
   try {
     const enterpriseOffers = await prisma.offer.findMany({
       where: { creatorId: session.user.id },
+      orderBy: { createdAt: "desc" },
     });
 
     if (enterpriseOffers.length <= 0)
