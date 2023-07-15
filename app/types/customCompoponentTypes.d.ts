@@ -1,6 +1,11 @@
 export type FromElement = {
-  label: string;
-  type: string;
+  key: number;
+  as: ElementType;
+  label?: string;
+  labelId?: string;
+  type?: string;
   placeholder?: string;
+  onClick?: () => void;
   disable?: boolean;
+  disposition?: string;
 };
