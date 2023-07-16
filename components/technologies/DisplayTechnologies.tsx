@@ -17,6 +17,7 @@ export default function DisplayTechnologies({
 }: DisplayTechnologiesProps) {
   const { technologies } = useTechnology();
   const handleClick = (technologyId: string) => {
+    // for removing technologyId
     if (onClick) onClick(technologyId);
   };
   return (

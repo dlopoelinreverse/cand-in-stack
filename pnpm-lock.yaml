@@ -11,6 +11,7 @@ specifiers:
   axios: ^1.4.0
   eslint: 8.44.0
   eslint-config-next: 13.4.8
+  nanoid: ^4.0.2
   next: 13.4.8
   next-auth: ^4.22.1
   postcss: 8.4.24
@@ -34,6 +35,7 @@ dependencies:
   axios: 1.4.0
   eslint: 8.44.0
   eslint-config-next: 13.4.8_iqf7tbmerllfqanu4l3d6aqdn4
+  nanoid: 4.0.2
   next: 13.4.8_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.22.1_huavqdni4pobvfczobpbvo6vhq
   postcss: 8.4.24
@@ -1885,6 +1887,12 @@ packages:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanoid/4.0.2:
+    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
