@@ -9,12 +9,12 @@ import Button from "../customs/Button";
 
 interface AddTechnologiesProps {
   technologiesIds: string[];
-  setTechnologiesOfferIds: React.Dispatch<SetStateAction<string[]>>;
+  setTechnologiesIds: React.Dispatch<SetStateAction<string[]>>;
 }
 
 export default function AddTechnologies({
   technologiesIds,
-  setTechnologiesOfferIds,
+  setTechnologiesIds,
 }: AddTechnologiesProps) {
   const { modalOpen, onOpenModal, onCloseModal } = useModal();
   const { technologies, categories, isCategoryLoading, isTechnoLoading } =
@@ -28,13 +28,13 @@ export default function AddTechnologies({
   };
 
   const handleAddTechnology = (technologyId: string) => {
-    setTechnologiesOfferIds((current) =>
+    setTechnologiesIds((current) =>
       current.includes(technologyId) ? [...current] : [...current, technologyId]
     );
   };
 
   const handleRemoveTechnology = (technologyId: string) => {
-    setTechnologiesOfferIds((current) =>
+    setTechnologiesIds((current) =>
       current.filter((id) => id !== technologyId)
     );
   };

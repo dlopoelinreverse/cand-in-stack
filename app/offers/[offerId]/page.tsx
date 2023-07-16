@@ -3,13 +3,6 @@ import Offer from "@/components/offers/offerPage/OfferPage";
 import { authOptions } from "@/utils/authOptions";
 import { getServerSession } from "next-auth";
 
-// Todo
-// check if userID === creator id
-// True = editable offer
-// False = check if session
-// True = check role = USER apply / ENTERPRISE null
-// False = Text invite to Signin/Signup
-
 export default async function OfferPage(context: {
   params: { offerId: string };
 }) {

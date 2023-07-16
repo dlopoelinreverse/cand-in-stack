@@ -6,13 +6,15 @@ import { useRouter } from "next/navigation";
 interface addEnterpriseOffer {
   enterpriseId: string;
   newOfferData: OfferDataType;
-  closeModal: () => void;
 }
 
 type OfferDataType = {
   title: string;
-  technologiesIds: string[];
   description: string;
+  city: string;
+  questions: string[];
+  jobType: string[];
+  technologiesIds: string[];
 };
 
 export default function useEnterpriseOffers(
@@ -33,19 +35,13 @@ export default function useEnterpriseOffers(
   });
 
   const addEnterpriseOffer = useMutation({
-    mutationFn: ({
-      enterpriseId,
-      newOfferData,
-      closeModal,
-    }: addEnterpriseOffer) => {
-      return axios
-        .post(`/api/offers/${enterpriseId}/new`, newOfferData)
-        .then(() => closeModal());
+    mutationFn: ({ enterpriseId, newOfferData }: addEnterpriseOffer) => {
+      return axios.post(`/api/offers/${enterpriseId}/new`, newOfferData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [enterpriseId] });
       queryClient.invalidateQueries({ queryKey: ["allOffers"] });
-      router.refresh();
+      router.push("/offers");
     },
   });
 

@@ -7,7 +7,7 @@ interface ButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
-  secondary?: string;
+  secondary?: boolean;
   additionalStyle?: string;
 }
 

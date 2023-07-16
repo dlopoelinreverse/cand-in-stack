@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,12 +11,14 @@ model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   image String?
-  email String? @unique
+  email String @unique
+  city String?
+  projects Json[]
+  userTechnos Json[]
   emailVerified DateTime?
   role Role @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userTechnos Json[]
 
   sessions Session[]
   accounts Account[]
@@ -38,11 +37,13 @@ model Offer {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   creatorId String   @db.ObjectId
+  description String
+  city String
+  questions String[]
+  jobType String[]
+  technologiesIds String[] @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  jobType String?
-  description String
-  technologiesIds String[] @db.ObjectId
 
   user User @relation(fields: [creatorId], references: [id], onDelete: Cascade)
   technology Technologie @relation(fields: [technologiesIds], references: [id], onDelete: Cascade)

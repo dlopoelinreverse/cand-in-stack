@@ -1,4 +1,5 @@
 import { prisma } from "@/app/libs/prismadb";
+import Profile from "@/components/profile/Profile";
 import { redirect } from "next/navigation";
 
 export default async function UserProfile({
@@ -16,5 +17,15 @@ export default async function UserProfile({
     return redirect("/");
   }
 
-  return <div>{userId}</div>;
+  const userData = await prisma.user.findFirst({
+    where: { id: userId },
+  });
+
+  if (!userData) return;
+
+  return (
+    <div>
+      <Profile userData={userData} />
+    </div>
+  );
 }

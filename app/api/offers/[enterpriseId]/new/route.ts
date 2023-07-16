@@ -9,9 +9,18 @@ export const POST = async (
 ) => {
   const { enterpriseId } = context.params;
   const body = await request.json();
-  const { title, jobType, technologiesIds, description } = body;
   console.log(body);
-  if (!title || !technologiesIds || technologiesIds.length <= 0 || !description)
+  const { title, jobType, technologiesIds, description, questions, city } =
+    body;
+  console.log(body);
+  if (
+    !title ||
+    !technologiesIds ||
+    technologiesIds.length <= 0 ||
+    !description ||
+    !jobType ||
+    !questions
+  )
     return new NextResponse(
       "Fileds are missing, check creatorId and technologiesIds",
       { status: 401 }
@@ -59,6 +68,8 @@ export const POST = async (
     title,
     creatorId: enterpriseId,
     jobType,
+    city,
+    questions,
     technologiesIds,
     description,
   };

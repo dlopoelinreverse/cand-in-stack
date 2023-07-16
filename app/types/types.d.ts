@@ -2,11 +2,12 @@ export type Offer = {
   id: string;
   title: string;
   creatorId: string;
+  description: string;
+  questions: string[];
+  jobType: string[];
+  technologiesIds: string[];
   createdAt: Date;
   updatedAt: Date;
-  jobType: string | null;
-  technologiesIds: string[];
-  description: string;
 };
 
 export type Technology = {
@@ -28,4 +29,11 @@ export type Category = {
   suggestedBy: string;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type LiteUserData = {
+  id: string;
+  name: string;
+  image: string | null;
+  email: string | null;
 };

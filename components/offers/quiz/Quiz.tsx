@@ -1,6 +1,6 @@
 "use client";
 import { nanoid } from "nanoid";
-import Button from "../customs/Button";
+import Button from "../../customs/Button";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 interface QuizProps {
@@ -76,13 +76,13 @@ function QuestionElement({
   return (
     <li>
       <p>Question n°{questionNum}</p>
-      <div className="flex items-center">
+      <div className="flex items-center gap-3">
         <textarea
           key={element.key}
           id={element.key}
           value={element.value}
           onChange={handleUpdateValue}
-          className="w-full"
+          className="w-full h-24 p-2 resize-none"
         />
         <Button label="X" onClick={() => removeQuestion(element.key)} />
       </div>

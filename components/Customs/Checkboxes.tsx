@@ -1,7 +1,5 @@
 "use client";
 
-import { nanoid } from "nanoid";
-
 interface CheckboxesProps {
   checkboxesValues: CheckboxValue[];
   setCheckedBoxes: React.Dispatch<React.SetStateAction<string[]>>;
@@ -19,20 +17,19 @@ export default function Checkboxes({
 }: CheckboxesProps) {
   const handleCheckboxes = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedBoxes((current: string[]) =>
-      current.includes(event.target.value)
-        ? current.filter((type: string) => type !== event.target.value)
-        : [...current, event.target.value]
+      current.includes(event.target.id)
+        ? current.filter((type: string) => type !== event.target.id)
+        : [...current, event.target.id]
     );
   };
   return (
     <ul className={className}>
       {checkboxesValues.map((checkbox: CheckboxValue) => (
-        <li key={nanoid()} className="flex gap-1">
+        <li key={checkbox.type} className="flex gap-1">
           <label htmlFor={checkbox.type}>{checkbox.type}</label>
           <input
             type="checkbox"
             id={checkbox.type}
-            value={checkbox.type}
             onChange={handleCheckboxes}
           />
         </li>
