@@ -13,10 +13,10 @@ interface UserTechnologiesProps {
 export default function UserTechnologies({
   isEditable,
 }: UserTechnologiesProps) {
-  const { userTechnologies, isLoading, isError } = useUser();
+  const { userTechnologies, userTechnoLoading, userTechnoError } = useUser();
   // create route user technologies, get userTechnologesIds into the Json[] => {Certified:{By, date} , technologyId: string}
-  if (isLoading || !userTechnologies) return <p>Loading...</p>;
-  if (isError) return <p>Error</p>;
+  if (userTechnoLoading || !userTechnologies) return <p>Loading...</p>;
+  if (userTechnoError) return <p>Error</p>;
 
   return (
     <div className="flex flex-col ">

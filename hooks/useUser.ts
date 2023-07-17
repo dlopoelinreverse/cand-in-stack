@@ -1,17 +1,30 @@
+import { User } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-export default function useUser() {
+export default function useUser(user?: User) {
   const queryClient = useQueryClient();
 
-  const getUserTcechnologies = () =>
+  const getUserData = () => axios("/api/user").then((res) => res.data);
+
+  const getUserTechnologies = () =>
     axios("/api/user/technologies").then((res) => res.data);
 
   const {
+    data: userData,
+    isLoading: userDataLoading,
+    isError: userDataError,
+  } = useQuery({
+    queryKey: ["userData"],
+    queryFn: getUserData,
+    initialData: user,
+  });
+
+  const {
     data: userTechnologies,
-    isLoading,
-    isError,
-  } = useQuery(["userTechnologies"], getUserTcechnologies);
+    isLoading: userTechnoLoading,
+    isError: userTechnoError,
+  } = useQuery(["userTechnologies"], getUserTechnologies);
 
   const updateUserTechnologies = useMutation({
     mutationFn: (technologiesIds: string[]) => {
@@ -24,5 +37,13 @@ export default function useUser() {
     },
   });
 
-  return { userTechnologies, isLoading, isError, updateUserTechnologies };
+  return {
+    userData,
+    userDataLoading,
+    userDataError,
+    userTechnologies,
+    userTechnoLoading,
+    userTechnoError,
+    updateUserTechnologies,
+  };
 }

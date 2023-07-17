@@ -12,7 +12,9 @@ interface ProfileProps {
 
 export default async function Profile({ userData }: ProfileProps) {
   const session = await getServerSession(authOptions);
+
   const isCurrentUser = session?.user?.id === userData.id;
+
   if (userData.role === "ENTERPRISE") {
     const enterpriseOffers = await prisma.offer.findMany({
       where: { creatorId: userData.id },

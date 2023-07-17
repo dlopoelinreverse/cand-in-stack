@@ -13,6 +13,8 @@ model User {
   image String?
   email String @unique
   city String?
+  phoneNumber String?
+  description String?
   projects Json[]
   // Introduce userTechnologyObject {isCertified{certifiedBy: adminId, certifiedAt}, technologyId}
   // userTechnos Json[]

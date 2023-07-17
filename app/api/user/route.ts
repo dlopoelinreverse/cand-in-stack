@@ -3,16 +3,17 @@ import { authOptions } from "@/utils/authOptions";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-export const PATCH = async (request: NextRequest) => {
+export const GET = async (request: NextRequest) => {
   const session = await getServerSession(authOptions);
-
   if (!session)
     return new NextResponse("You have to be authenticated", { status: 401 });
 
-  const isValidUser = await prisma.user.findFirst({
-    where: { id: session.user.id },
-  });
-
-  if (!isValidUser)
-    return new NextResponse("User can't be find", { status: 401 });
+  try {
+    const userData = await prisma.user.findFirst({
+      where: { id: session.user.id },
+    });
+    return new NextResponse(JSON.stringify(userData), { status: 200 });
+  } catch (error) {
+    return new NextResponse(JSON.stringify(error), { status: 405 });
+  }
 };
