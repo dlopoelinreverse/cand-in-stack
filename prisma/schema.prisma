@@ -14,7 +14,9 @@ model User {
   email String @unique
   city String?
   projects Json[]
-  userTechnos Json[]
+  // Introduce userTechnologyObject {isCertified{certifiedBy: adminId, certifiedAt}, technologyId}
+  // userTechnos Json[]
+  userTechnologies String[] @db.ObjectId
   emailVerified DateTime?
   role Role @default(USER)
   createdAt DateTime @default(now())
@@ -23,6 +25,8 @@ model User {
   sessions Session[]
   accounts Account[]
   offers Offer[]
+  // Not definitive
+  technology Technologie @relation(fields: [userTechnologies], references: [id], onDelete: Cascade)
 
 }
 
@@ -62,6 +66,7 @@ model Technologie {
   categoryId String @db.ObjectId
 
   offers Offer[]
+  users User[]
   category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
 

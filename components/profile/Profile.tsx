@@ -4,7 +4,6 @@ import OffersDisplay from "../offers/OffersDisplay";
 import ProfileData from "./ProfileData";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
-import DisplayTechnologies from "../technologies/DisplayTechnologies";
 import UserTechnologies from "../technologies/userTechnologies/UserTechnologies";
 
 interface ProfileProps {

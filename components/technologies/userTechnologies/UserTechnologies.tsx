@@ -3,6 +3,8 @@ import useTechnology from "@/hooks/useTechnology";
 import AddTechnologies from "../AddTechnologies";
 import { useState } from "react";
 import DisplayTechnologies from "../DisplayTechnologies";
+import useUser from "@/hooks/useUser";
+import AddUserTechnologies from "./AddUserTechnologies";
 
 interface UserTechnologiesProps {
   isEditable: boolean;
@@ -11,18 +13,22 @@ interface UserTechnologiesProps {
 export default function UserTechnologies({
   isEditable,
 }: UserTechnologiesProps) {
-  const [userTechnologiesIds, setUserTechnologiesIds] = useState<string[]>([]);
-  const { technologies } = useTechnology();
-  // create route user technologies, get userTechnologesIds into the Json[] => {validated: , technologyId: string}
+  const { userTechnologies, isLoading, isError } = useUser();
+  // create route user technologies, get userTechnologesIds into the Json[] => {Certified:{By, date} , technologyId: string}
+  if (isLoading || !userTechnologies) return <p>Loading...</p>;
+  if (isError) return <p>Error</p>;
+
   return (
-    <div>
-      {isEditable && (
-        <AddTechnologies
-          technologiesIds={userTechnologiesIds}
-          setTechnologiesIds={setUserTechnologiesIds}
+    <div className="flex flex-col ">
+      {isEditable ? (
+        <AddUserTechnologies
+          userTechnologies={userTechnologies.userTechnologies}
+        />
+      ) : (
+        <DisplayTechnologies
+          technologyIds={userTechnologies.userTechnologies}
         />
       )}
-      {/* <DisplayTechnologies  /> */}
     </div>
   );
 }

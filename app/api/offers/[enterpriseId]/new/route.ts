@@ -9,7 +9,7 @@ export const POST = async (
 ) => {
   const { enterpriseId } = context.params;
   const body = await request.json();
-  console.log(body);
+
   const { title, jobType, technologiesIds, description, questions, city } =
     body;
   console.log(body);
@@ -21,10 +21,7 @@ export const POST = async (
     !jobType ||
     !questions
   )
-    return new NextResponse(
-      "Fileds are missing, check creatorId and technologiesIds",
-      { status: 401 }
-    );
+    return new NextResponse("Fileds are missing", { status: 401 });
 
   for (const technologieId of technologiesIds) {
     try {
