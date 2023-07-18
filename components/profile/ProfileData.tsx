@@ -103,6 +103,11 @@ export default function ProfileData({ user, isEditable }: ProfileDataProps) {
       );
       console.log(dataToUpdate);
       updateProfileData.mutate(dataToUpdate);
+
+      console.log(Object.entries(updatedData));
+
+      // better optimisation, get updatedData {key: originalKeyName : "updatedValue"}, send updatedData
+      // modifier updatedData en array ?
     }
   };
   return (

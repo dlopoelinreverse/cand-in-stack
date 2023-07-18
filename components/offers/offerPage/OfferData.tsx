@@ -1,3 +1,4 @@
+"use client";
 import { Offer } from "@/app/types/types";
 import ApplyOnOffer from "@/components/apply/ApplyOnOffer";
 import ContentDisplayer, {
@@ -5,8 +6,10 @@ import ContentDisplayer, {
 } from "@/components/customs/contentDisplayer/ContentDisplayer";
 import CustomEditableElement from "@/components/customs/customEditableElement/CustomEditableElement";
 import DisplayTechnologies from "@/components/technologies/DisplayTechnologies";
+import useOffer from "@/hooks/useOffer";
 import { User } from "@prisma/client";
 import { nanoid } from "nanoid";
+import TESTUpdateOffer from "./TESTUpdateOffer";
 
 interface OfferDataProps {
   offerData: Offer;
@@ -23,6 +26,10 @@ export default function OfferData({
   isAuthenticatedUser,
   userRole,
 }: OfferDataProps) {
+  const { offerData, isLoading, isError } = useOffer(offer, offer.id);
+
+  if (isLoading) return <p>OfferData Loading</p>;
+  if (isError) return <p>OfferData Error</p>;
   const contentOffer: ContentElement[] = [
     {
       key: nanoid(),
@@ -32,7 +39,7 @@ export default function OfferData({
       },
       elementLength: "short",
       elementType: "text",
-      value: offer.title,
+      value: offerData.title,
       editedElement: {
         isEdited: false,
         editedValue: "",
@@ -40,12 +47,15 @@ export default function OfferData({
       className: "",
     },
   ];
+  const handleUpdateOfferData = (updatedData: {}) => {};
   return (
     <div className="">
       <ContentDisplayer
         contentElements={contentOffer}
         isEditable={isCurrentEnterpriseOffer}
+        updateData={handleUpdateOfferData}
       />
+      <TESTUpdateOffer offerId={offerData.id} />
       {/* <CustomEditableElement isEditable={isCurrentEnterpriseOffer} as="h1">
         {offer.title}
       </CustomEditableElement>

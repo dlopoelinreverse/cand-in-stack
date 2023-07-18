@@ -3,7 +3,10 @@ import {
   prismaError,
   sessionError,
 } from "@/app/libs/db/errors";
-import { getSession, isValidOffer } from "@/app/libs/db/reccurentChecks";
+import {
+  getSessionFromServer,
+  isValidOffer,
+} from "@/app/libs/db/reccurentChecks";
 import { prisma } from "@/app/libs/prismadb";
 import { NextRequest } from "next/server";
 
@@ -12,7 +15,7 @@ export const POST = async (request: NextRequest) => {
 
   const { offerId } = body;
 
-  const session = await getSession();
+  const session = await getSessionFromServer();
 
   if (!session) return sessionError;
 
