@@ -9,16 +9,17 @@ import {
   useState,
 } from "react";
 import { ContentElement } from "./ContentDisplayer";
-import useUser from "@/hooks/useUser";
 import Button from "../Button";
 
 export default function EditableContent({
   contentElements,
+  updateData,
 }: {
   contentElements: ContentElement[];
+  updateData: (updatedData: {}) => void;
 }) {
   // logic update data
-  const { userData } = useUser();
+  // const { userData, updateProfileData } = useUser();
 
   const [updatedData, setUpdatedData] = useState({});
 
@@ -29,13 +30,15 @@ export default function EditableContent({
   };
 
   const testUpdating = () => {
-    if (Object.keys(updatedData).length) {
-      let dataToUpdate = userData;
-      Object.entries(updatedData).map(
-        (entrie) => (dataToUpdate[entrie[0]] = entrie[1])
-      );
-      console.log(dataToUpdate);
-    }
+    // if (Object.keys(updatedData).length) {
+    //   let dataToUpdate = userData;
+    //   Object.entries(updatedData).map(
+    //     (entrie) => (dataToUpdate[entrie[0]] = entrie[1])
+    //   );
+    //   console.log(dataToUpdate);
+    //   updateProfileData.mutate(dataToUpdate);
+    // }
+    // updateData(updatedData);
   };
 
   return (
@@ -50,9 +53,14 @@ export default function EditableContent({
           label={element.label.content}
           htmlFor={element.label.htmlFor}
           setUpdatedData={setUpdatedData}
+          className={element.className}
         />
       ))}
-      <Button label="test" onClick={testUpdating} />
+      <Button
+        label="test"
+        // disabled={updateProfileData.isLoading}
+        onClick={() => updateData(updatedData)}
+      />
     </form>
   );
 }
@@ -64,6 +72,7 @@ interface ElementProps extends HTMLAttributes<HTMLOrSVGElement> {
   label?: string;
   htmlFor: string;
   setUpdatedData: Dispatch<SetStateAction<{}>>;
+  className: string;
 }
 
 const Element: FC<ElementProps> = ({
@@ -73,6 +82,7 @@ const Element: FC<ElementProps> = ({
   label,
   htmlFor,
   setUpdatedData,
+  className,
 }) => {
   const handleUpdateElementValue = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -91,6 +101,7 @@ const Element: FC<ElementProps> = ({
         defaultValue={value}
         id={htmlFor}
         onChange={handleUpdateElementValue}
+        className={className}
       />
     </div>
   );

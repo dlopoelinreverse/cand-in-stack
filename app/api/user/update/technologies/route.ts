@@ -39,10 +39,6 @@ export const PATCH = async (request: NextRequest) => {
         return new NextResponse(`${technologieId} doesn't exist`, {
           status: 401,
         });
-      // if (userTechnologies?.userTechnologies?.includes(technologieId))
-      //   return new NextResponse(`${technologieId} is already in`, {
-      //     status: 401,
-      //   });
     } catch (error) {
       return new NextResponse(`${technologieId} doesn't exist : ${error}`, {
         status: 401,

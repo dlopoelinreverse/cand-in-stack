@@ -1,5 +1,5 @@
 import { prisma } from "@/app/libs/prismadb";
-import Offer from "@/components/offers/offerPage/OfferPage";
+import OfferData from "@/components/offers/offerPage/OfferData";
 import { authOptions } from "@/utils/authOptions";
 import { getServerSession } from "next-auth";
 
@@ -24,16 +24,16 @@ export default async function OfferPage(context: {
 
   const isCurrentEnterpriseOffer = session?.user.id === offerData?.creatorId;
 
-  const isUnauthenticatedUser = !session;
+  const isAuthenticatedUser = Boolean(session);
 
   const userRole = session?.user.role;
 
   return (
-    <Offer
+    <OfferData
       offerData={offerData}
       enterpriseData={enterpriseData}
       isCurrentEnterpriseOffer={isCurrentEnterpriseOffer}
-      isUnauthenticatedUser={isUnauthenticatedUser}
+      isAuthenticatedUser={isAuthenticatedUser}
       userRole={userRole}
     />
   );

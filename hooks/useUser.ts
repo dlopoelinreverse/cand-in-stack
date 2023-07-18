@@ -20,6 +20,17 @@ export default function useUser(user?: User) {
     initialData: user,
   });
 
+  const updateProfileData = useMutation({
+    mutationFn: (updatedData: User) => {
+      return axios
+        .patch("/api/user/update/profile", { updatedData })
+        .then((res) => console.log(res));
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["userData"]);
+    },
+  });
+
   const {
     data: userTechnologies,
     isLoading: userTechnoLoading,
@@ -41,6 +52,7 @@ export default function useUser(user?: User) {
     userData,
     userDataLoading,
     userDataError,
+    updateProfileData,
     userTechnologies,
     userTechnoLoading,
     userTechnoError,

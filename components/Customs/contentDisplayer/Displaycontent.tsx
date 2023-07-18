@@ -7,11 +7,13 @@ import EditableContent from "./EditableContent";
 interface DisplayContentProps {
   contentElements: ContentElement[];
   isEditable: boolean;
+  updateData: (updatedData: {}) => void;
 }
 
 export default function DisplayContent({
   contentElements,
   isEditable,
+  updateData,
 }: DisplayContentProps) {
   const [isEditing, setIsEditing] = useState(false);
   const elementTypes = {
@@ -27,11 +29,18 @@ export default function DisplayContent({
         />
       )}
       {isEditing ? (
-        <EditableContent contentElements={contentElements} />
+        <EditableContent
+          contentElements={contentElements}
+          updateData={updateData}
+        />
       ) : (
         <ul>
           {contentElements.map((element) => (
-            <Element key={element.key} as={elementTypes[element.elementLength]}>
+            <Element
+              key={element.key}
+              as={elementTypes[element.elementLength]}
+              className={element.className}
+            >
               <>
                 {element.label.content}
                 {element.value}
@@ -47,8 +56,9 @@ export default function DisplayContent({
 interface ElementProps extends HTMLAttributes<HTMLOrSVGElement> {
   as: ElementType;
   children: React.ReactElement | string;
+  className: string;
 }
 
-const Element: FC<ElementProps> = ({ as: Type, children }) => {
-  return <Type>{children}</Type>;
+const Element: FC<ElementProps> = ({ as: Type, children, className }) => {
+  return <Type className={className}>{children}</Type>;
 };

@@ -15,11 +15,12 @@ export default function DisplayTechnologies({
   onClick,
   typeAction,
 }: DisplayTechnologiesProps) {
-  const { technologies } = useTechnology();
+  const { technologies, isTechnoLoading } = useTechnology();
   const handleClick = (technologyId: string) => {
     // for removing technologyId
     if (onClick) onClick(technologyId);
   };
+  if (isTechnoLoading) return <p>Technologies Loading...</p>;
   return (
     <ul className="flex flex-wrap justify-center gap-3 mx-auto max-w-[300px] min-h-12">
       {technologyIds.map((technologyId) => (

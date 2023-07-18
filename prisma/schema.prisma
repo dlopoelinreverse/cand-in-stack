@@ -51,9 +51,22 @@ model Offer {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  apply Apply[]
+
   user User @relation(fields: [creatorId], references: [id], onDelete: Cascade)
   technology Technologie @relation(fields: [technologiesIds], references: [id], onDelete: Cascade)
 
+}
+
+model Apply {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  candidateId String   @db.ObjectId
+  enterpriseId String   @db.ObjectId
+  offerId String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  offer Offer @relation(fields: [offerId], references: [id], onDelete: Cascade)
 }
 
 

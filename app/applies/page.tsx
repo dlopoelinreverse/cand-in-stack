@@ -6,7 +6,7 @@ import React from "react";
 export default async function Applies() {
   const session = await getServerSession(authOptions);
   if (!session) {
-    redirect("/signin");
+    redirect("/");
   }
   return <div>Applies</div>;
 }

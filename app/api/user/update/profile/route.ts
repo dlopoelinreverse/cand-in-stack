@@ -4,6 +4,9 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export const PATCH = async (request: NextRequest) => {
+  const body = await request.json();
+
+  const { updatedData } = body;
   const session = await getServerSession(authOptions);
 
   if (!session)
@@ -15,4 +18,6 @@ export const PATCH = async (request: NextRequest) => {
 
   if (!isValidUser)
     return new NextResponse("User can't be find", { status: 401 });
+
+  return new NextResponse(JSON.stringify(updatedData), { status: 201 });
 };
