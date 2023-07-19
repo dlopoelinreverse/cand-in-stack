@@ -1,31 +1,39 @@
+import {
+  invalidUserIdError,
+  prismaError,
+  sessionError,
+} from "@/app/libs/db/errors";
+import {
+  checkIsValidUser,
+  getSessionFromServer,
+} from "@/app/libs/db/reccurentChecks";
 import { prisma } from "@/app/libs/prismadb";
-import { authOptions } from "@/utils/authOptions";
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export const PATCH = async (request: NextRequest) => {
   const body = await request.json();
 
-  const { updatedData } = body; // { {key: originalKeyName : "updatedValue"}}
-  const session = await getServerSession(authOptions);
+  const { updatedData } = body;
 
-  if (!session)
-    return new NextResponse("You have to be authenticated", { status: 401 });
+  console.log(updatedData);
 
-  const isValidUser = await prisma.user.findFirst({
-    where: { id: session.user.id },
-  });
+  if (!updatedData) return new NextResponse("Missing fields", { status: 400 });
 
-  if (!isValidUser)
-    return new NextResponse("User can't be find", { status: 401 });
+  const session = await getSessionFromServer();
 
-  // const updatedKeys = Object.keys(updatedData)
-  // let newData = {}
-  // for(const key of updatedKeys) {
-  // const newValue = {[key]: updateData[key]}
-  // newData = {...newData, ...newValue}
-  // }
-  // const newUserData = await prisma.user.update({where:{id: session.user.id}, data:})
+  if (!session) return sessionError;
 
-  return new NextResponse(JSON.stringify(updatedData), { status: 201 });
+  const isValidUser = await checkIsValidUser(session.user.id);
+
+  if (!isValidUser) return invalidUserIdError;
+
+  try {
+    const newProfileData = await prisma.user.update({
+      where: { id: session.user.id },
+      data: updatedData,
+    });
+    return new NextResponse(JSON.stringify(newProfileData), { status: 201 });
+  } catch (error) {
+    return prismaError(error);
+  }
 };

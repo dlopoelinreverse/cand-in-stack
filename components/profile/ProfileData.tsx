@@ -12,7 +12,6 @@ interface ProfileDataProps {
 }
 
 export default function ProfileData({ user, isEditable }: ProfileDataProps) {
-  // useUser => getUserDatawith initial data = user(from server)
   const { userData, userDataLoading, userDataError, updateProfileData } =
     useUser(user);
   if (userDataLoading) return <p>Loading</p>;
@@ -51,7 +50,7 @@ export default function ProfileData({ user, isEditable }: ProfileDataProps) {
     {
       key: nanoid(),
       label: {
-        htmlFor: "phone",
+        htmlFor: "phoneNumber",
         content: "Téléphonne : ",
       },
       elementLength: "short",
@@ -97,24 +96,18 @@ export default function ProfileData({ user, isEditable }: ProfileDataProps) {
 
   const handleUpdateProfileData = (updatedData: {}) => {
     if (Object.keys(updatedData).length) {
-      let dataToUpdate = userData;
-      Object.entries(updatedData).map(
-        (entrie) => (dataToUpdate[entrie[0]] = entrie[1])
-      );
-      console.log(dataToUpdate);
-      updateProfileData.mutate(dataToUpdate);
-
-      console.log(Object.entries(updatedData));
-
-      // better optimisation, get updatedData {key: originalKeyName : "updatedValue"}, send updatedData
-      // modifier updatedData en array ?
+      updateProfileData.mutate(updatedData);
     }
   };
+
+  console.log("render");
+
   return (
     <ContentDisplayer
       contentElements={profileContentElements}
       isEditable={isEditable}
       updateData={handleUpdateProfileData}
+      onSuccessUpdate={updateProfileData.isSuccess}
     />
   );
 }

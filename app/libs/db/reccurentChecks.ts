@@ -18,3 +18,12 @@ export const isValidOffer = async (offerId: string) => {
     return false;
   }
 };
+
+export const checkIsValidUser = async (userId: string) => {
+  try {
+    await prisma.user.findFirst({ where: { id: userId } });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};

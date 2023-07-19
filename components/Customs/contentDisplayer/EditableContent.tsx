@@ -18,27 +18,12 @@ export default function EditableContent({
   contentElements: ContentElement[];
   updateData: (updatedData: {}) => void;
 }) {
-  // logic update data
-  // const { userData, updateProfileData } = useUser();
-
   const [updatedData, setUpdatedData] = useState({});
 
   const elementTypes = {
     long: "textarea" as ElementType,
 
     short: "input" as ElementType,
-  };
-
-  const testUpdating = () => {
-    // if (Object.keys(updatedData).length) {
-    //   let dataToUpdate = userData;
-    //   Object.entries(updatedData).map(
-    //     (entrie) => (dataToUpdate[entrie[0]] = entrie[1])
-    //   );
-    //   console.log(dataToUpdate);
-    //   updateProfileData.mutate(dataToUpdate);
-    // }
-    // updateData(updatedData);
   };
 
   return (
@@ -56,11 +41,7 @@ export default function EditableContent({
           className={element.className}
         />
       ))}
-      <Button
-        label="test"
-        // disabled={updateProfileData.isLoading}
-        onClick={() => updateData(updatedData)}
-      />
+      <Button label="test" onClick={() => updateData(updatedData)} />
     </form>
   );
 }

@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { User } from "@/app/types/next-auth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -21,10 +21,8 @@ export default function useUser(user?: User) {
   });
 
   const updateProfileData = useMutation({
-    mutationFn: (updatedData: User) => {
-      return axios
-        .patch("/api/user/update/profile", { updatedData })
-        .then((res) => console.log(res));
+    mutationFn: (updatedData: {}) => {
+      return axios.patch("/api/user/update/profile", { updatedData });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["userData"]);
@@ -39,9 +37,7 @@ export default function useUser(user?: User) {
 
   const updateUserTechnologies = useMutation({
     mutationFn: (technologiesIds: string[]) => {
-      return axios
-        .patch("/api/user/update/technologies", { technologiesIds })
-        .then((res) => console.log(res));
+      return axios.patch("/api/user/update/technologies", { technologiesIds });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["userTechnologies"]);

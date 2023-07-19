@@ -5,6 +5,7 @@ interface ContentDisplayerProps {
   contentElements: ContentElement[];
   isEditable: boolean;
   updateData: (updatedData: {}) => void;
+  onSuccessUpdate: boolean;
 }
 
 export type ContentElement = {
@@ -27,12 +28,14 @@ export default function ContentDisplayer({
   contentElements,
   isEditable,
   updateData,
+  onSuccessUpdate,
 }: ContentDisplayerProps) {
   return (
     <DisplayContent
       contentElements={contentElements}
       isEditable={isEditable}
       updateData={updateData}
+      onSuccessUpdate={onSuccessUpdate}
     />
   );
 }

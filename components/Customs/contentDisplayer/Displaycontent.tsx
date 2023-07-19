@@ -1,5 +1,12 @@
 "use client";
-import { ElementType, FC, HTMLAttributes, useState } from "react";
+import {
+  ElementType,
+  FC,
+  HTMLAttributes,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import Button from "../Button";
 import { ContentElement } from "./ContentDisplayer";
 import EditableContent from "./EditableContent";
@@ -8,18 +15,23 @@ interface DisplayContentProps {
   contentElements: ContentElement[];
   isEditable: boolean;
   updateData: (updatedData: {}) => void;
+  onSuccessUpdate: boolean;
 }
 
 export default function DisplayContent({
   contentElements,
   isEditable,
   updateData,
+  onSuccessUpdate,
 }: DisplayContentProps) {
   const [isEditing, setIsEditing] = useState(false);
   const elementTypes = {
     long: "p" as ElementType,
     short: "h3" as ElementType,
   };
+  useEffect(() => {
+    if (onSuccessUpdate) setIsEditing(!onSuccessUpdate);
+  }, [onSuccessUpdate]);
   return (
     <div>
       {isEditable && (
