@@ -5,13 +5,13 @@ import React from "react";
 import TechnologyBadge from "./TechnologyBadge";
 
 interface DisplayTechnologiesProps {
-  technologyIds: string[];
+  technologiesIds: string[];
   onClick?: (technologyId: string) => void;
   typeAction?: "adding" | "removing";
 }
 
 export default function DisplayTechnologies({
-  technologyIds,
+  technologiesIds,
   onClick,
   typeAction,
 }: DisplayTechnologiesProps) {
@@ -23,7 +23,7 @@ export default function DisplayTechnologies({
   if (isTechnoLoading) return <p>Technologies Loading...</p>;
   return (
     <ul className="flex flex-wrap justify-center gap-3 mx-auto max-w-[300px] min-h-12">
-      {technologyIds.map((technologyId) => (
+      {technologiesIds.map((technologyId) => (
         <TechnologyBadge
           onClick={() => handleClick(technologyId)}
           technology={

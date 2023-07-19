@@ -28,7 +28,7 @@ export default function CategoryAccordion({
         <DisplayTechnologies
           typeAction="adding"
           onClick={onClick}
-          technologyIds={technologies?.map((technology) => technology.id)}
+          technologiesIds={technologies?.map((technology) => technology.id)}
         />
       </ul>
     </div>

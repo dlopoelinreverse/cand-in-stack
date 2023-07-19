@@ -1,5 +1,5 @@
 import { Offer } from "@/app/types/types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 export default function useOffer(offer?: Offer, offerId?: string) {
@@ -15,5 +15,13 @@ export default function useOffer(offer?: Offer, offerId?: string) {
     initialData: offer,
   });
 
-  return { offerData, isLoading, isError };
+  const updateOffer = useMutation({
+    mutationFn: (updatedData: {}) =>
+      axios
+        .patch(`/api/offer/${offerId}`, { updatedData })
+        .then((res) => console.log(res)),
+    onSuccess: () => queryClient.invalidateQueries([offerId]),
+  });
+
+  return { offerData, isLoading, isError, updateOffer };
 }

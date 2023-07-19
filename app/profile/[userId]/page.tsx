@@ -23,9 +23,11 @@ export default async function UserProfile({
 
   if (!userData) return;
 
+  const userRole = userData.role;
+
   return (
     <div>
-      <Profile userData={userData} />
+      <Profile userServerData={userData} userRole={userRole} />
     </div>
   );
 }

@@ -4,8 +4,6 @@ import axios from "axios";
 export default function useTechnology() {
   const queryClient = useQueryClient();
 
-  // ?? get technogies by CategoryId
-
   const getTechnologies = () =>
     axios("/api/technologies").then((res) => res.data);
   const getCategories = () =>

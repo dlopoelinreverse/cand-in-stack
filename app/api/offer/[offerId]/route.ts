@@ -36,7 +36,7 @@ export const PATCH = async (
 
   const body = await request.json();
 
-  const { updatedData, updatedKeys } = body;
+  const { updatedData } = body;
 
   const session = await getSessionFromServer();
 
@@ -48,15 +48,15 @@ export const PATCH = async (
 
   let newData = {};
 
-  for (const key of updatedKeys) {
-    const newValue = { [key]: updatedData[key] };
-    newData = { ...newData, ...newValue };
-  }
+  // for (const key of updatedKeys) {
+  //   const newValue = { [key]: updatedData[key] };
+  //   newData = { ...newData, ...newValue };
+  // }
 
   try {
     const updatedOffer = await prisma.offer.update({
       where: { id: offerId },
-      data: { ...newData },
+      data: updatedData,
     });
     return new NextResponse(JSON.stringify(updatedOffer), { status: 201 });
   } catch (error) {

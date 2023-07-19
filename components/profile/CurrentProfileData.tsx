@@ -1,20 +1,26 @@
 "use client";
-import { User } from "@prisma/client";
+
+import useUser from "@/hooks/useUser";
 import ContentDisplayer, {
   ContentElement,
 } from "../customs/contentDisplayer/ContentDisplayer";
+import { User } from "@prisma/client";
 import { nanoid } from "nanoid";
-import CurrentProfileData from "./CurrentProfileData";
 
-interface ProfileDataProps {
-  userServerData: User;
-  isCurrentUser: boolean;
-}
-
-export default function ProfileData({
-  userServerData: userData,
-  isCurrentUser,
-}: ProfileDataProps) {
+export default function CurrentProfileData({
+  userData: userServerData,
+}: {
+  userData: User;
+}) {
+  const { userData, userDataLoading, userDataError, updateProfileData } =
+    useUser(userServerData);
+  if (userDataLoading) return <p>Loading</p>;
+  if (userDataError) return <p>Error</p>;
+  const handleUpdateProfileData = (updatedData: {}) => {
+    if (Object.keys(updatedData).length) {
+      updateProfileData.mutate(updatedData);
+    }
+  };
   const profileContentElements: ContentElement[] = [
     {
       key: nanoid(),
@@ -92,15 +98,12 @@ export default function ProfileData({
       className: "",
     },
   ];
-
-  if (isCurrentUser) return <CurrentProfileData userData={userData} />;
-
   return (
     <ContentDisplayer
       contentElements={profileContentElements}
-      isEditable={isCurrentUser}
-      updateData={() => {}}
-      onSuccessUpdate={false}
+      isEditable={true}
+      updateData={handleUpdateProfileData}
+      onSuccessUpdate={updateProfileData.isSuccess}
     />
   );
 }

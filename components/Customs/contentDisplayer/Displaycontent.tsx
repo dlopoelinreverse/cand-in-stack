@@ -40,7 +40,7 @@ export default function DisplayContent({
           onClick={() => setIsEditing((current) => !current)}
         />
       )}
-      {isEditing ? (
+      {isEditable && isEditing ? (
         <EditableContent
           contentElements={contentElements}
           updateData={updateData}

@@ -2,13 +2,13 @@ import { User } from "@/app/types/next-auth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-export default function useUser(user?: User) {
+export default function useUser(user: User) {
   const queryClient = useQueryClient();
 
   const getUserData = () => axios("/api/user").then((res) => res.data);
 
   const getUserTechnologies = () =>
-    axios("/api/user/technologies").then((res) => res.data);
+    axios(`/api/user/technologies`).then((res) => res.data);
 
   const {
     data: userData,

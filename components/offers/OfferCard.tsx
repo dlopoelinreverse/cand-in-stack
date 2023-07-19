@@ -15,7 +15,7 @@ export default function OfferCard({ offer, children }: OfferCardProps) {
       ) : (
         <>
           <h3>{offer.title}</h3>
-          <DisplayTechnologies technologyIds={offer.technologiesIds} />
+          <DisplayTechnologies technologiesIds={offer.technologiesIds} />
           <p>{offer.description}</p>
           <Link
             href={`/offers/${offer.id}`}

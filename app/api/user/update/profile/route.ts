@@ -15,8 +15,6 @@ export const PATCH = async (request: NextRequest) => {
 
   const { updatedData } = body;
 
-  console.log(updatedData);
-
   if (!updatedData) return new NextResponse("Missing fields", { status: 400 });
 
   const session = await getSessionFromServer();

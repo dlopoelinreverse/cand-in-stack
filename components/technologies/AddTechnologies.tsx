@@ -43,7 +43,7 @@ export default function AddTechnologies({
       <DisplayTechnologies
         typeAction="removing"
         onClick={handleRemoveTechnology}
-        technologyIds={technologiesIds}
+        technologiesIds={technologiesIds}
       />
       <Button
         label={` Ajouter 
@@ -61,7 +61,7 @@ export default function AddTechnologies({
           <DisplayTechnologies
             typeAction="removing"
             onClick={handleRemoveTechnology}
-            technologyIds={technologiesIds}
+            technologiesIds={technologiesIds}
           />
           {categories?.map((category: Category) => (
             <CategoryAccordion

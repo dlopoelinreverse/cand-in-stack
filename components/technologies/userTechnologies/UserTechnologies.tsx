@@ -1,34 +1,20 @@
-"use client";
-import useTechnology from "@/hooks/useTechnology";
-import AddTechnologies from "../AddTechnologies";
-import { useState } from "react";
 import DisplayTechnologies from "../DisplayTechnologies";
-import useUser from "@/hooks/useUser";
-import AddUserTechnologies from "./AddUserTechnologies";
+import { User } from "@prisma/client";
+import CurrentUserTechnologies from "./CurrentUserTechnologies";
 
 interface UserTechnologiesProps {
-  isEditable: boolean;
+  userServerData: User;
+  isCurrentUser: boolean;
 }
 
 export default function UserTechnologies({
-  isEditable,
+  userServerData,
+  isCurrentUser,
 }: UserTechnologiesProps) {
-  const { userTechnologies, userTechnoLoading, userTechnoError } = useUser();
-  // create route user technologies, get userTechnologesIds into the Json[] => {Certified:{By, date} , technologyId: string}
-  if (userTechnoLoading || !userTechnologies) return <p>Loading...</p>;
-  if (userTechnoError) return <p>Error</p>;
+  if (isCurrentUser)
+    return <CurrentUserTechnologies userServerData={userServerData} />;
 
   return (
-    <div className="flex flex-col ">
-      {isEditable ? (
-        <AddUserTechnologies
-          userTechnologies={userTechnologies.userTechnologies}
-        />
-      ) : (
-        <DisplayTechnologies
-          technologyIds={userTechnologies.userTechnologies}
-        />
-      )}
-    </div>
+    <DisplayTechnologies technologiesIds={userServerData.userTechnologies} />
   );
 }

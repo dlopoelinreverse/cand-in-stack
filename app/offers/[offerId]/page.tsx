@@ -12,17 +12,20 @@ export default async function OfferPage(context: {
 
   if (!offerId) return;
 
-  const offerData = await prisma.offer.findFirst({ where: { id: offerId } });
+  const offerServerData = await prisma.offer.findFirst({
+    where: { id: offerId },
+  });
 
-  if (!offerData) return;
+  if (!offerServerData) return;
 
   const enterpriseData = await prisma.user.findFirst({
-    where: { id: offerData.creatorId },
+    where: { id: offerServerData.creatorId },
   });
 
   if (!enterpriseData) return;
 
-  const isCurrentEnterpriseOffer = session?.user.id === offerData?.creatorId;
+  const isCurrentEnterpriseOffer =
+    session?.user.id === offerServerData?.creatorId;
 
   const isAuthenticatedUser = Boolean(session);
 
@@ -30,7 +33,7 @@ export default async function OfferPage(context: {
 
   return (
     <OfferData
-      offerData={offerData}
+      offerServerData={offerServerData}
       enterpriseData={enterpriseData}
       isCurrentEnterpriseOffer={isCurrentEnterpriseOffer}
       isAuthenticatedUser={isAuthenticatedUser}

@@ -1,4 +1,3 @@
-import { UseMutationResult } from "@tanstack/react-query";
 import DisplayContent from "./Displaycontent";
 
 interface ContentDisplayerProps {
