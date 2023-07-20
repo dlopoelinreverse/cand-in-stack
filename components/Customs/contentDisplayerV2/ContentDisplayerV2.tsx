@@ -21,7 +21,7 @@ export type ContentElementV2 = {
 export default function ContentDisplayerV2({
   content,
 }: ContentDisplayerV2Props) {
-  const handleClick = (el) => {
+  const handleClick = (el: string) => {
     console.log(el);
   };
   return (

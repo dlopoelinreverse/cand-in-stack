@@ -3,11 +3,16 @@ export type Offer = {
   title: string;
   creatorId: string;
   description: string;
-  questions: string[];
+  questions: Question[];
   jobType: string[];
   technologiesIds: string[];
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type QuestionType = {
+  id: string;
+  content: string;
 };
 
 export type Technology = {

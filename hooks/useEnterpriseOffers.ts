@@ -1,4 +1,4 @@
-import { Offer } from "@/app/types/types";
+import { Offer, Question } from "@/app/types/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ type OfferDataType = {
   title: string;
   description: string;
   city: string;
-  questions: string[];
+  questions: Question[];
   jobType: string[];
   technologiesIds: string[];
 };

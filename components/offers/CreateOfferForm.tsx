@@ -2,10 +2,11 @@
 import React, { useState } from "react";
 import AddTechnologies from "../technologies/AddTechnologies";
 import Checkboxes from "../customs/Checkboxes";
-import Quiz, { QuestionElement } from "./quiz/Quiz";
 import Button from "../customs/Button";
 import { useRouter } from "next/navigation";
 import useEnterpriseOffers from "@/hooks/useEnterpriseOffers";
+import { QuestionType } from "@/app/types/types";
+import CreateQuestion from "../questions/CreateQuestion";
 
 export default function CreateOfferForm({ userId }: { userId: string }) {
   const { addEnterpriseOffer } = useEnterpriseOffers(userId);
@@ -13,9 +14,7 @@ export default function CreateOfferForm({ userId }: { userId: string }) {
     []
   );
   const [typesOffer, setTypesOffer] = useState<string[]>([]);
-  const [questioneElements, setQuestionElements] = useState<QuestionElement[]>(
-    []
-  );
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
   const router = useRouter();
   const offerTypes = [
     { type: "alternance" },
@@ -30,7 +29,6 @@ export default function CreateOfferForm({ userId }: { userId: string }) {
     const title = data.get("title");
     const description = data.get("description");
     const city = data.get("city");
-    const questions = questioneElements.map((element) => element.value);
     const newOfferData = {
       title: String(title),
       description: String(description),
@@ -75,10 +73,14 @@ export default function CreateOfferForm({ userId }: { userId: string }) {
             className="flex flex-wrap justify-center gap-5 mt-5"
           />
         </label>
-        <Quiz
+        <CreateQuestion
+          createdQuestion={questions}
+          setCreatedQuestions={setQuestions}
+        />
+        {/* <Quiz
           questionElements={questioneElements}
           setQuestionElements={setQuestionElements}
-        />
+        /> */}
         <AddTechnologies
           technologiesIds={technologiesOfferIds}
           setTechnologiesIds={setTechnologiesOfferIds}

@@ -19,6 +19,7 @@ model User {
   // Introduce userTechnologyObject {isCertified{certifiedBy: adminId, certifiedAt}, technologyId}
   // userTechnos Json[]
   userTechnologies String[] @db.ObjectId
+  appliesIds String[] @db.ObjectId
   emailVerified DateTime?
   role Role @default(USER)
   createdAt DateTime @default(now())
@@ -45,7 +46,7 @@ model Offer {
   creatorId String   @db.ObjectId
   description String
   city String
-  questions String[]
+  questions Json[]
   jobType String[]
   technologiesIds String[] @db.ObjectId
   createdAt DateTime @default(now())
@@ -61,12 +62,11 @@ model Offer {
 model Apply {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   candidateId String   @db.ObjectId
-  enterpriseId String   @db.ObjectId
   offerId String   @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  offer Offer @relation(fields: [offerId], references: [id], onDelete: Cascade)
+  offers Offer @relation(fields: [offerId], references: [id], onDelete: Cascade)
 }
 
 
