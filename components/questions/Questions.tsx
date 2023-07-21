@@ -1,14 +1,16 @@
-import { QuestionType } from "@/app/types/types";
+import { AnswerType, QuestionType } from "@/app/types/types";
 import EditableQuestion from "./EditableQuestion";
 import Question from "./Question";
 import AddQuestion from "./AddQuestion";
 import Answer from "./Answer";
+import { Dispatch, SetStateAction } from "react";
 
 interface QuestionProps {
   usage: "displaying" | "addEdit" | "creating" | "answering";
   questionsOffer: QuestionType[];
   editQuestion?: (editedQuestion: QuestionType) => void;
   addQuestion?: (newQuestion: QuestionType) => void;
+  setAnswers?: Dispatch<SetStateAction<AnswerType[]>>;
 }
 
 export default function Questions({
@@ -16,6 +18,7 @@ export default function Questions({
   questionsOffer,
   editQuestion,
   addQuestion,
+  setAnswers,
 }: QuestionProps) {
   return (
     <>
@@ -34,7 +37,14 @@ export default function Questions({
                 </div>
               );
             case "answering":
-              return <Answer key={question.id} question={question} />;
+              if (!setAnswers) return;
+              return (
+                <Answer
+                  key={question.id}
+                  question={question}
+                  setAnswers={setAnswers}
+                />
+              );
           }
         })}
       </ul>

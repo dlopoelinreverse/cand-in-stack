@@ -63,7 +63,9 @@ model Offer {
 model Apply {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   candidateId String   @db.ObjectId
+  enterpriseId String @db.ObjectId
   offerId String   @db.ObjectId
+  answers Json[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -14,69 +14,73 @@ export type LinkType = {
   targetSegment: string | null;
 };
 
-const usersLinks: UserLink[] = [
-  {
-    userRole: "USER",
-    links: [
-      { href: "/", title: "Les Offres", targetSegment: null },
-      { href: "/applies", title: "Mes Candidatures", targetSegment: "applies" },
-    ],
-  },
-  {
-    userRole: "ENTERPRISE",
-    links: [
-      { href: "/", title: "Les Offres", targetSegment: null },
-      { href: "/offers", title: "Mes Offres", targetSegment: "offers" },
-      {
-        href: "/candidates",
-        title: "Mes Candidats",
-        targetSegment: "candidates",
-      },
-      {
-        href: "/dashboard",
-        title: "Tableau de bord",
-        targetSegment: "dashboard",
-      },
-    ],
-  },
-  {
-    userRole: "ADMIN",
-    links: [
-      { href: "/", title: "Les Offres", targetSegment: null },
-      {
-        href: "/candidates",
-        title: "Mes Candidats",
-        targetSegment: "candidates",
-      },
-      {
-        href: "/dashboard",
-        title: "Tableau de bord",
-        targetSegment: "dashboard",
-      },
-    ],
-  },
-  {
-    userRole: "SUPERADMIN",
-    links: [
-      { href: "/", title: "Les Offres", targetSegment: null },
-      {
-        href: "/candidates",
-        title: "Mes Candidats",
-        targetSegment: "candidates",
-      },
-      {
-        href: "/dashboard",
-        title: "Tableau de bord",
-        targetSegment: "dashboard",
-      },
-    ],
-  },
-];
-
 export default async function NavBarUserDispatchLinks() {
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
   const userRole = session?.user.role;
+
+  const usersLinks: UserLink[] = [
+    {
+      userRole: "USER",
+      links: [
+        { href: "/", title: "Les Offres", targetSegment: null },
+        {
+          href: "/applies",
+          title: "Mes Candidatures",
+          targetSegment: "applies",
+        },
+      ],
+    },
+    {
+      userRole: "ENTERPRISE",
+      links: [
+        { href: "/", title: "Les Offres", targetSegment: null },
+        { href: "/offers", title: "Mes Offres", targetSegment: "offers" },
+        {
+          href: "/candidates",
+          title: "Mes Candidats",
+          targetSegment: "candidates",
+        },
+        {
+          href: "/dashboard",
+          title: "Tableau de bord",
+          targetSegment: "dashboard",
+        },
+      ],
+    },
+    {
+      userRole: "ADMIN",
+      links: [
+        { href: "/", title: "Les Offres", targetSegment: null },
+        {
+          href: "/candidates",
+          title: "Mes Candidats",
+          targetSegment: "candidates",
+        },
+        {
+          href: "/dashboard",
+          title: "Tableau de bord",
+          targetSegment: "dashboard",
+        },
+      ],
+    },
+    {
+      userRole: "SUPERADMIN",
+      links: [
+        { href: "/", title: "Les Offres", targetSegment: null },
+        {
+          href: "/candidates",
+          title: "Mes Candidats",
+          targetSegment: "candidates",
+        },
+        {
+          href: "/dashboard",
+          title: "Tableau de bord",
+          targetSegment: "dashboard",
+        },
+      ],
+    },
+  ];
 
   const links = userRole
     ? usersLinks.find((userLink) => userLink.userRole === userRole)?.links

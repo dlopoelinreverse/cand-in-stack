@@ -15,6 +15,21 @@ export type QuestionType = {
   content: string;
 };
 
+export type AnswerType = {
+  id: string;
+  questionId: string;
+  questionContent: string;
+  answer: string;
+};
+
+export type ApplyType = {
+  id: string;
+  candidateId: string;
+  offerId: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type Technology = {
   id: string;
   name: string;

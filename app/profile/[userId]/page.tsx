@@ -1,5 +1,6 @@
 import { prisma } from "@/app/libs/prismadb";
 import Profile from "@/components/profile/Profile";
+import { checkUserIdOrRedirect } from "@/utils/userCheck";
 import { redirect } from "next/navigation";
 
 export default async function UserProfile({
@@ -9,13 +10,8 @@ export default async function UserProfile({
 }) {
   const { userId } = params;
   if (!userId) return redirect("/");
-  try {
-    await prisma.user.findFirst({
-      where: { id: userId },
-    });
-  } catch (error) {
-    return redirect("/");
-  }
+
+  await checkUserIdOrRedirect(userId);
 
   const userData = await prisma.user.findFirst({
     where: { id: userId },
