@@ -9,7 +9,7 @@ interface ModalProps {
 export default function MyModal({ isOpen, onClose, children }: ModalProps) {
   if (!isOpen) return;
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden outline-none select-none bg-opacity-40 focus:outline-none bg-neutral-300">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden bg-opacity-50 outline-none select-none focus:outline-none bg-neutral-200">
       <div className="relative w-full h-full mx-auto my-6 lg:w-3/6 lg:max-w-3xl lg:h-auto">
         <div className="relative flex flex-col w-full h-full border-0 shadow-lg outline-none rounded-xl bg-slate-100 lg:h-auto focus:outline-none">
           <button
@@ -18,7 +18,9 @@ export default function MyModal({ isOpen, onClose, children }: ModalProps) {
           >
             X
           </button>
-          {children}
+          <div className="flex flex-col items-center w-full p-5">
+            {children}
+          </div>
         </div>
       </div>
     </div>

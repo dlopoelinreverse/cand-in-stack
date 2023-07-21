@@ -15,6 +15,7 @@ model User {
   city String?
   phoneNumber String?
   description String?
+  resumeUuid String?
   projects Json[]
   // Introduce userTechnologyObject {isCertified{certifiedBy: adminId, certifiedAt}, technologyId}
   // userTechnos Json[]

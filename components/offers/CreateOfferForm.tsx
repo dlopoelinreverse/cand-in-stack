@@ -77,10 +77,6 @@ export default function CreateOfferForm({ userId }: { userId: string }) {
           createdQuestion={questions}
           setCreatedQuestions={setQuestions}
         />
-        {/* <Quiz
-          questionElements={questioneElements}
-          setQuestionElements={setQuestionElements}
-        /> */}
         <AddTechnologies
           technologiesIds={technologiesOfferIds}
           setTechnologiesIds={setTechnologiesOfferIds}

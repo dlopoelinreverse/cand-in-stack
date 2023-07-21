@@ -35,7 +35,7 @@ export default function CreateQuestion({
   return (
     <div>
       <Questions
-        usage="created"
+        usage="creating"
         questionsOffer={createdQuestion}
         editQuestion={handleQuestionEdtit}
       />

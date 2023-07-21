@@ -2,7 +2,6 @@
 
 import { Offer } from "@/app/types/types";
 import OfferCard from "./OfferCard";
-import AddOfferForm from "./AddOfferForm";
 import useEnterpriseOffers from "@/hooks/useEnterpriseOffers";
 import Link from "next/link";
 
@@ -26,9 +25,6 @@ export default function EnterpriseOffers({
     <ul className="flex flex-wrap items-start justify-start w-full h-full gap-5 mx-auto mt-10">
       {!offers || offers.length <= 0 ? (
         <OfferCard>
-          {/* <AddOfferForm 
-          enterpriseId={enterpriseId} 
-          /> */}
           <>
             <h3>Ajouter une offre</h3>
             <Link href="/offers/create">+</Link>
@@ -37,7 +33,6 @@ export default function EnterpriseOffers({
       ) : (
         <>
           <OfferCard>
-            {/* <AddOfferForm enterpriseId={enterpriseId} /> */}
             <>
               <h3>Ajouter une offre</h3>
               <Link href="/offers/create">+</Link>

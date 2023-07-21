@@ -87,7 +87,7 @@ export default function OfferData({
         </>
       ) : (
         <>
-          <Questions usage="display" questionsOffer={offerData.questions} />
+          <Questions usage="displaying" questionsOffer={offerData.questions} />
           <DisplayTechnologies technologiesIds={offer.technologiesIds} />
         </>
       )}

@@ -6,6 +6,8 @@ import ContentDisplayer, {
 } from "../customs/contentDisplayer/ContentDisplayer";
 import { User } from "@prisma/client";
 import { nanoid } from "nanoid";
+import UploadResume from "./UploadResume";
+import Link from "next/link";
 
 export default function CurrentProfileData({
   userData: userServerData,
@@ -14,13 +16,22 @@ export default function CurrentProfileData({
 }) {
   const { userData, userDataLoading, userDataError, updateProfileData } =
     useUser(userServerData);
+
   if (userDataLoading) return <p>Loading</p>;
+
   if (userDataError) return <p>Error</p>;
+
   const handleUpdateProfileData = (updatedData: {}) => {
     if (Object.keys(updatedData).length) {
       updateProfileData.mutate(updatedData);
     }
   };
+
+  const handleUploadResumeUuid = (resumeUuid: string) => {
+    console.log(resumeUuid);
+    updateProfileData.mutate({ resumeUuid: resumeUuid });
+  };
+
   const profileContentElements: ContentElement[] = [
     {
       key: nanoid(),
@@ -99,11 +110,19 @@ export default function CurrentProfileData({
     },
   ];
   return (
-    <ContentDisplayer
-      contentElements={profileContentElements}
-      isEditable={true}
-      updateData={handleUpdateProfileData}
-      onSuccessUpdate={updateProfileData.isSuccess}
-    />
+    <>
+      <ContentDisplayer
+        contentElements={profileContentElements}
+        isEditable={true}
+        updateData={handleUpdateProfileData}
+        onSuccessUpdate={updateProfileData.isSuccess}
+      />
+      <UploadResume uploadUserResumeUuid={handleUploadResumeUuid} />
+      {userData.resumeUuid && (
+        <Link href={`/uploads/resume/${userData.resumeUuid}`} target="_blank">
+          Votre CV
+        </Link>
+      )}
+    </>
   );
 }
