@@ -23,7 +23,7 @@ export default function OffersDisplay({
   return (
     <ul className="flex flex-wrap items-start justify-start w-full h-full gap-5 mx-auto mt-10">
       {offersData?.map((offer: Offer) => (
-        <OfferCard key={offer.id} offer={offer} />
+        <OfferCard key={offer.id} offer={offer} usage="offer" />
       ))}
     </ul>
   );

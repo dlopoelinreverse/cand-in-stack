@@ -3,7 +3,7 @@ export type Offer = {
   title: string;
   creatorId: string;
   description: string;
-  questions: Question[];
+  questions: Prisma.JsonValue[] | QuestionType[];
   jobType: string[];
   technologiesIds: string[];
   createdAt: Date;
@@ -26,8 +26,15 @@ export type ApplyType = {
   id: string;
   candidateId: string;
   offerId: string;
+  answers: Prisma.Json[] | AnswerType[];
+  status: Prisma.Json | ApplyTypeStatus;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type ApplyTypeStatus = {
+  candidate: "sent" | "ongoing" | "rejected";
+  enterprise: "unread" | "ongoing" | "rejected";
 };
 
 export type Technology = {

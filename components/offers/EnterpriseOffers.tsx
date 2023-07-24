@@ -24,7 +24,7 @@ export default function EnterpriseOffers({
   return (
     <ul className="flex flex-wrap items-start justify-start w-full h-full gap-5 mx-auto mt-10">
       {!offers || offers.length <= 0 ? (
-        <OfferCard>
+        <OfferCard usage="offer">
           <>
             <h3>Ajouter une offre</h3>
             <Link href="/offers/create">+</Link>
@@ -32,14 +32,14 @@ export default function EnterpriseOffers({
         </OfferCard>
       ) : (
         <>
-          <OfferCard>
+          <OfferCard usage="offer">
             <>
               <h3>Ajouter une offre</h3>
               <Link href="/offers/create">+</Link>
             </>
           </OfferCard>
           {enterpriseOffers?.map((offer: Offer) => (
-            <OfferCard key={offer.id} offer={offer} />
+            <OfferCard key={offer.id} offer={offer} usage="offer" />
           ))}
         </>
       )}

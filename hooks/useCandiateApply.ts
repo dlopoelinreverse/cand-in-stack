@@ -2,14 +2,14 @@ import { AnswerType, ApplyType } from "@/app/types/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-export default function useApply(applies?: ApplyType[]) {
+export default function useCandidateApply(applies?: ApplyType[]) {
   const queryClient = useQueryClient();
 
   const {
     data: candiateApplies,
     isLoading: isLoadingCandidatesApplies,
     isError: isErrorCandidatesApplies,
-  } = useQuery({
+  } = useQuery<ApplyType[]>({
     queryKey: ["candiateApplies"],
     queryFn: () => axios("/api/applies/candidate").then((res) => res.data),
     initialData: applies,

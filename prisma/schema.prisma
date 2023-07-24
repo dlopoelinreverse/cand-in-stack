@@ -66,6 +66,7 @@ model Apply {
   enterpriseId String @db.ObjectId
   offerId String   @db.ObjectId
   answers Json[]
+  status Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

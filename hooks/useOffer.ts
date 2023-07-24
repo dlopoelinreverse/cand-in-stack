@@ -17,9 +17,7 @@ export default function useOffer(offerId?: string, offer?: Offer) {
 
   const updateOffer = useMutation({
     mutationFn: (updatedData: {}) =>
-      axios
-        .patch(`/api/offer/${offerId}`, { updatedData })
-        .then((res) => console.log(res)),
+      axios.patch(`/api/offer/${offerId}`, { updatedData }),
     onSuccess: () => queryClient.invalidateQueries([offerId]),
   });
 

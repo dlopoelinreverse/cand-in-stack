@@ -5,8 +5,9 @@ import Button from "../customs/Button";
 import MyModal from "../Modals/MyModal";
 import { useModal } from "@/hooks/useModal";
 import Questions from "../questions/Questions";
-import { useState } from "react";
-import useApply from "@/hooks/useApply";
+import { useEffect, useState } from "react";
+import useCandidateApply from "@/hooks/useCandiateApply";
+import { redirect } from "next/navigation";
 
 interface ApplyOnOffer {
   offer: Offer;
@@ -14,7 +15,7 @@ interface ApplyOnOffer {
 
 export default function ApplyOnOffer({ offer }: ApplyOnOffer) {
   const { modalOpen, onOpenModal, onCloseModal } = useModal();
-  const { candiateApplies, createApply } = useApply();
+  const { candiateApplies, createApply } = useCandidateApply();
   const [answers, setAnswers] = useState<AnswerType[]>([]);
 
   const handleApplication = () => {
@@ -28,9 +29,22 @@ export default function ApplyOnOffer({ offer }: ApplyOnOffer) {
   const handleCancel = () => {
     onCloseModal(), setAnswers([]);
   };
+
+  const isAlereadyApplied = Boolean(
+    candiateApplies?.find((apply) => apply.offerId === offer.id)
+  );
+
+  useEffect(() => {
+    if (createApply.isSuccess) redirect("/applies");
+  }, [createApply.isSuccess]);
+
   return (
     <div>
-      <Button label="Candidater" onClick={onOpenModal} />
+      <Button
+        label="Candidater"
+        onClick={onOpenModal}
+        disabled={isAlereadyApplied}
+      />
       <MyModal isOpen={modalOpen} onClose={handleCancel}>
         <>
           <h1>{offer.title}</h1>

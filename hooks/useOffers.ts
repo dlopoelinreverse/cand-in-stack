@@ -1,14 +1,13 @@
 import { Offer } from "@/app/types/types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 export default function useOffers(offers?: Offer[]) {
-  const queryClient = useQueryClient();
   const {
     data: offersData,
     isLoading,
     isError,
-  } = useQuery({
+  } = useQuery<Offer[]>({
     queryKey: ["allOffers"],
     queryFn: () => axios("/api/offers/").then((res) => res.data),
     initialData: offers,

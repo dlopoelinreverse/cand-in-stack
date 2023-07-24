@@ -1,6 +1,6 @@
 "use client";
 import { Offer, QuestionType } from "@/app/types/types";
-import ApplyOnOffer from "@/components/apply/ApplyOnOffer";
+import ApplyOnOffer from "@/components/applies/ApplyOnOffer";
 import ContentDisplayer, {
   ContentElement,
 } from "@/components/customs/contentDisplayer/ContentDisplayer";

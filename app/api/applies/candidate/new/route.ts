@@ -32,6 +32,10 @@ export const POST = async (request: NextRequest) => {
       enterpriseId,
       offerId,
       answers,
+      status: {
+        candidate: "sent",
+        enterprise: "unread",
+      },
     };
     const createApply = await prisma.apply.create({
       data: newApply,
