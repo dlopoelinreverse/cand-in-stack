@@ -1,8 +1,6 @@
 "use client";
 import { ApplyType } from "@/app/types/types";
 import useCandidateApply from "@/hooks/useCandiateApply";
-import ApplyCard from "./ApplyCard";
-
 interface AppliesDisplayProps {
   candidateServerApplies: ApplyType[];
 }
@@ -15,13 +13,24 @@ export default function AppliesDisplay({
     isLoadingCandidatesApplies,
     isErrorCandidatesApplies,
   } = useCandidateApply(candidateServerApplies);
+
   if (isLoadingCandidatesApplies || !candiateApplies) return <p>Is Loading</p>;
+
   if (isErrorCandidatesApplies) return <p>Is Error</p>;
-  return (
-    <ul>
-      {candiateApplies.map((apply) => (
-        <ApplyCard key={apply.id} apply={apply} />
-      ))}
-    </ul>
-  );
+
+  const appliesContentElements = candiateApplies.map((apply) => {
+    return {
+      id: apply.id,
+      title: apply.offerData.title,
+      date: apply.createdAt,
+      technologiesIds: apply.offerData.technologiesIds,
+      status: apply.status.candidate,
+      link: {
+        href: apply.offerId,
+        label: "Vers l'offre",
+      },
+    };
+  });
+
+  return <></>;
 }

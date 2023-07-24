@@ -4,7 +4,7 @@ import React from "react";
 interface TechnologyProps {
   technology: Technology;
   onClick: (technologyId: string) => void;
-  typeAction?: "adding" | "removing";
+  typeAction?: "adding" | "removing" | "displaying";
 }
 
 export default function TechnologyBadge({

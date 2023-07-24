@@ -26,16 +26,51 @@ export const POST = async (request: NextRequest) => {
 
   if (!validOffer) return invalidOfferIdError;
 
+  // get offer data
+  let offerTitle;
+  let technologiesIds;
+  let enterpriseName;
+  try {
+    const offerData = await prisma.offer.findFirst({
+      where: { id: offerId },
+      select: { title: true, technologiesIds: true },
+    });
+    offerTitle = offerData?.title;
+    technologiesIds = offerData?.technologiesIds;
+
+    if (!offerTitle || !technologiesIds)
+      return new NextResponse("Cannot find offertitle or technologiesIds", {
+        status: 401,
+      });
+  } catch (error) {
+    return prismaError(error);
+  }
+
+  try {
+    const enterpriseData = await prisma.user.findFirst({
+      where: { id: enterpriseId },
+      select: { name: true },
+    });
+    enterpriseName = enterpriseData?.name;
+    if (!enterpriseName)
+      return new NextResponse("Cannot find enterpriseName", {
+        status: 401,
+      });
+  } catch (error) {
+    return prismaError(error);
+  }
+
   try {
     const newApply = {
       candidateId: session.user.id,
       enterpriseId,
       offerId,
       answers,
-      status: {
-        candidate: "sent",
-        enterprise: "unread",
-      },
+      candidateStatus: "sent",
+      enterpriseStatus: "unread",
+      offerTitle,
+      technologiesIds,
+      enterpriseName,
     };
     const createApply = await prisma.apply.create({
       data: newApply,

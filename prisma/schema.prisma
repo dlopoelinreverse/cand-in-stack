@@ -66,7 +66,11 @@ model Apply {
   enterpriseId String @db.ObjectId
   offerId String   @db.ObjectId
   answers Json[]
-  status Json
+  candidateStatus String
+  enterpriseStatus String
+  offerTitle String
+  technologiesIds String[]
+  enterpriseName String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

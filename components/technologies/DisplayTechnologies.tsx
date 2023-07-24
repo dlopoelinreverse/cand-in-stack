@@ -7,7 +7,7 @@ import TechnologyBadge from "./TechnologyBadge";
 interface DisplayTechnologiesProps {
   technologiesIds: string[];
   onClick?: (technologyId: string) => void;
-  typeAction?: "adding" | "removing";
+  typeAction?: "adding" | "removing" | "displaying";
 }
 
 export default function DisplayTechnologies({

@@ -18,5 +18,5 @@ export default function ApplyCard({ apply }: ApplyCardProps) {
 
   if (!offerData) return redirect("/");
 
-  return <OfferCard offer={offerData} usage="apply" apply={apply} />;
+  return <></>;
 }
