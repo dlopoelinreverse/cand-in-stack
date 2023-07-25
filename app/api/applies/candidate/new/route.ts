@@ -30,6 +30,7 @@ export const POST = async (request: NextRequest) => {
   let offerTitle;
   let technologiesIds;
   let enterpriseName;
+  let candidateName;
   try {
     const offerData = await prisma.offer.findFirst({
       where: { id: offerId },
@@ -61,6 +62,20 @@ export const POST = async (request: NextRequest) => {
   }
 
   try {
+    const candidateData = await prisma.user.findFirst({
+      where: { id: session.user.id },
+      select: { name: true },
+    });
+    candidateName = candidateData?.name;
+    if (!candidateName)
+      return new NextResponse("Cannot find candidateName", {
+        status: 401,
+      });
+  } catch (error) {
+    return prismaError(error);
+  }
+
+  try {
     const newApply = {
       candidateId: session.user.id,
       enterpriseId,
@@ -71,6 +86,7 @@ export const POST = async (request: NextRequest) => {
       offerTitle,
       technologiesIds,
       enterpriseName,
+      candidateName,
     };
     const createApply = await prisma.apply.create({
       data: newApply,

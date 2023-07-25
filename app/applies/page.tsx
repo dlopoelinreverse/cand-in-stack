@@ -3,7 +3,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
 import { prisma } from "../libs/prismadb";
-import AppliesTable from "@/components/applies/AppliesTable";
+import DataTable from "@/components/customs/DataTable";
+import { appliesColumns } from "../../components/applies/appliesColumns";
 
 export default async function Applies() {
   const session = await getServerSession(authOptions);
@@ -14,6 +15,5 @@ export default async function Applies() {
     where: { candidateId: session.user.id },
   });
 
-  // return <AppliesDataTable columns={columns} data={candidateApplies} />;
-  return <AppliesTable appliesData={candidateApplies} />;
+  return <DataTable columns={appliesColumns} data={candidateApplies} />;
 }
