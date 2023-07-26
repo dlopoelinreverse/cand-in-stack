@@ -51,7 +51,13 @@ export type EnterpriseOffersWithApplies = {
   title: string;
   city: string;
   createdAt: Date;
-  appliesIds: string[];
+  appliesData: Prisma.JsonValue[] | OfferApplyDataType[];
+};
+
+export type OfferApplyDataType = {
+  applyId: string;
+  candidateId: string;
+  candidateName: string;
 };
 
 export type Technology = {

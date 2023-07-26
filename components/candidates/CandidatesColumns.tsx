@@ -1,9 +1,13 @@
 "use client";
 
-import { ApplyType, EnterpriseOffersWithApplies } from "@/app/types/types";
+import {
+  EnterpriseOffersWithApplies,
+  OfferApplyDataType,
+} from "@/app/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import Button from "../customs/Button";
+import CandidatesList from "./CandidatesList";
 
 export const candidatesColumns: ColumnDef<EnterpriseOffersWithApplies>[] = [
   {
@@ -20,16 +24,12 @@ export const candidatesColumns: ColumnDef<EnterpriseOffersWithApplies>[] = [
     },
   },
   {
-    accessorKey: "appliesIds",
+    accessorKey: "appliesData",
     header: "Candidats",
     cell: ({ row }) => {
-      const appliesIds = row.getValue("appliesIds") as string[];
-      const appliesCount = appliesIds.length;
-      return (
-        <Button
-          label={`${appliesCount} candidat${appliesCount > 1 ? "s" : ""}`}
-        />
-      );
+      const appliesData = row.getValue("appliesData") as OfferApplyDataType[];
+
+      return <CandidatesList applies={appliesData} />;
     },
   },
   {

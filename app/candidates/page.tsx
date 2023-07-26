@@ -15,7 +15,7 @@ export const getEnterpriseOffersWithAppliesData = async (
       title: true,
       city: true,
       createdAt: true,
-      appliesIds: true,
+      appliesData: true,
     },
   });
   return enterpriseOffersData;
@@ -29,7 +29,7 @@ export default async function Candidates() {
   const enterpriseOffersWithApplies = await getEnterpriseOffersWithAppliesData(
     session.user.id
   );
-  console.log(enterpriseOffersWithApplies);
+
   return (
     <DataTable columns={candidatesColumns} data={enterpriseOffersWithApplies} />
   );

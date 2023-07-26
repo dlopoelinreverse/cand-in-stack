@@ -27,7 +27,16 @@ export default function Questions({
           switch (usage) {
             case "displaying":
               return <Question key={question.id} question={question} />;
-            case "addEdit" || "creating":
+            case "addEdit":
+              return (
+                <div key={question.id}>
+                  <EditableQuestion
+                    question={question}
+                    editQuestion={editQuestion}
+                  />
+                </div>
+              );
+            case "creating":
               return (
                 <div key={question.id}>
                   <EditableQuestion

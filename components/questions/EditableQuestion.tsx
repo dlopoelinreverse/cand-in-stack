@@ -33,7 +33,11 @@ export default function EditableQuestion({
             defaultValue={question.content}
             onChange={(e) => setEditedContent(e.target.value)}
           />
-          <Button label="Editer" onClick={handleEdit} />
+          <Button
+            label="Editer"
+            disabled={editedContent.length <= 0}
+            onClick={handleEdit}
+          />
           <Button
             label="Annuler"
             onClick={() => setIsEditing((current) => !current)}

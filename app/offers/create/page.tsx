@@ -8,9 +8,5 @@ export default async function CreateOfferPage() {
   if (!session || session.user.role !== "ENTERPRISE") redirect("/");
   const userId = session?.user.id;
   if (!userId) return;
-  return (
-    <>
-      <CreateOfferForm userId={userId} />
-    </>
-  );
+  return <CreateOfferForm userId={userId} />;
 }
