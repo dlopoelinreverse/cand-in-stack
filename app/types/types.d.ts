@@ -46,6 +46,14 @@ export type ApplyOfferData = {
   };
 };
 
+export type EnterpriseOffersWithApplies = {
+  id: string;
+  title: string;
+  city: string;
+  createdAt: Date;
+  appliesIds: string[];
+};
+
 export type Technology = {
   id: string;
   name: string;

@@ -91,6 +91,13 @@ export const POST = async (request: NextRequest) => {
     const createApply = await prisma.apply.create({
       data: newApply,
     });
+    const applyId = createApply.id;
+    const offer = await prisma.offer.findFirst({ where: { id: offerId } });
+    offer?.appliesIds.push(applyId);
+    await prisma.offer.update({
+      where: { id: offerId },
+      data: { appliesIds: offer?.appliesIds },
+    });
     return new NextResponse(JSON.stringify(createApply), { status: 201 });
   } catch (error) {
     return prismaError(error);
