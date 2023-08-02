@@ -97,6 +97,7 @@ export const POST = async (request: NextRequest) => {
       applyId,
       candidateId: session.user.id,
       candidateName,
+      applyDate: createApply.createdAt.toDateString(),
     });
     await prisma.offer.update({
       where: { id: offerId },

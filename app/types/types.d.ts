@@ -58,6 +58,7 @@ export type OfferApplyDataType = {
   applyId: string;
   candidateId: string;
   candidateName: string;
+  applyDate: string;
 };
 
 export type Technology = {

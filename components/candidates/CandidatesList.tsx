@@ -24,7 +24,7 @@ export default function CandidatesList({ applies }: CandidatesList) {
         onClick={onOpenModal}
       />
       <MyModal isOpen={modalOpen} onClose={onCloseModal}>
-        <ul className="">
+        <ul className="w-full">
           {applies.map((apply) => (
             <CandidateData key={apply.applyId} apply={apply} />
           ))}
