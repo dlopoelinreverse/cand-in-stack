@@ -7,7 +7,7 @@ import { useModal } from "@/hooks/useModal";
 import Questions from "../questions/Questions";
 import { useEffect, useState } from "react";
 import useCandidateApply from "@/hooks/useCandiateApply";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 interface ApplyOnOffer {
   offer: Offer;
@@ -16,6 +16,7 @@ interface ApplyOnOffer {
 export default function ApplyOnOffer({ offer }: ApplyOnOffer) {
   const { modalOpen, onOpenModal, onCloseModal } = useModal();
   const { candiateApplies, createApply } = useCandidateApply();
+  const router = useRouter();
   const [answers, setAnswers] = useState<AnswerType[]>([]);
 
   const handleApplication = () => {
@@ -35,8 +36,11 @@ export default function ApplyOnOffer({ offer }: ApplyOnOffer) {
   );
 
   useEffect(() => {
-    if (createApply.isSuccess) redirect("/applies");
-  }, [createApply.isSuccess]);
+    if (createApply.isSuccess) {
+      router.refresh();
+      redirect("/applies");
+    }
+  }, [createApply.isSuccess, router]);
 
   return (
     <div>
@@ -48,7 +52,6 @@ export default function ApplyOnOffer({ offer }: ApplyOnOffer) {
       <MyModal isOpen={modalOpen} onClose={handleCancel}>
         <>
           <h1>{offer.title}</h1>
-          <pre>{JSON.stringify(candiateApplies)}</pre>
           <Questions
             usage="answering"
             questionsOffer={offer.questions}
