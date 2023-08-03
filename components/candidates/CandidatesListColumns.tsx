@@ -6,10 +6,9 @@ import {
 } from "@/app/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-import Button from "../customs/Button";
 import CandidatesList from "./CandidatesList";
 
-export const candidatesColumns: ColumnDef<EnterpriseOffersWithApplies>[] = [
+export const offersColumns: ColumnDef<EnterpriseOffersWithApplies>[] = [
   {
     accessorKey: "title",
     header: "Titre de l'offre",

@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { prisma } from "../libs/prismadb";
 import DataTable from "@/components/customs/DataTable";
-import { candidatesColumns } from "@/components/candidates/CandidatesColumns";
+import { offersColumns } from "@/components/candidates/OffersColumns";
 
 export const getEnterpriseOffersWithAppliesData = async (
   enterpriseId: string
@@ -31,6 +31,6 @@ export default async function Candidates() {
   );
 
   return (
-    <DataTable columns={candidatesColumns} data={enterpriseOffersWithApplies} />
+    <DataTable columns={offersColumns} data={enterpriseOffersWithApplies} />
   );
 }

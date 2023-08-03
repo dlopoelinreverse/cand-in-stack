@@ -8,13 +8,9 @@ import UserTechnologies from "../technologies/userTechnologies/UserTechnologies"
 
 interface ProfileProps {
   userServerData: User;
-  userRole: string;
 }
 
-export default async function Profile({
-  userServerData,
-  userRole,
-}: ProfileProps) {
+export default async function Profile({ userServerData }: ProfileProps) {
   const session = await getServerSession(authOptions);
 
   const isCurrentUser = session?.user?.id === userServerData.id;
@@ -26,7 +22,7 @@ export default async function Profile({
       orderBy: { createdAt: "desc" },
     });
     return (
-      <div className="flex w-full">
+      <div className="flex">
         <div className="w-2/3">
           <OffersDisplay offers={enterpriseOffers} />
         </div>
