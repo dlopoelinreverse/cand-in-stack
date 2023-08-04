@@ -9,6 +9,7 @@ import {
 
 import DisplayAnswers from "./DisplayAnswers";
 import { AdditionnalApplyDataType } from "./ServerAdditionnalData";
+import StatusBadge from "@/components/applies/StatusBadge";
 
 interface AdditionnalDataProps {
   serverAppliesData: AdditionnalApplyDataType[];
@@ -31,6 +32,8 @@ export default function AdditionnalData({
           </AccordionTrigger>
           <AccordionContent>
             <div>
+              <StatusBadge status={apply.enterpriseStatus} />
+              {/* Add selector status + add specific type status --> 'intresting' */}
               <DisplayAnswers answers={apply.answers} />
             </div>
           </AccordionContent>

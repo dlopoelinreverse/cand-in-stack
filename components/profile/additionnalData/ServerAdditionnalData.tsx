@@ -7,7 +7,7 @@ export type AdditionnalApplyDataType = {
   offerTitle: string;
   answers: AnswerType[];
   createdAt: Date;
-  enterpriseStatus: string;
+  enterpriseStatus: "sent" | "unread" | "ongoing" | "acepted" | "rejected";
 };
 
 export const getCandidatesAppliesData = async (candidateId: string) => {
