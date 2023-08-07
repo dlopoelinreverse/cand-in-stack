@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import Button from "../customs/Button";
+import CustomButton from "../customs/CustomButton";
 import { useRouter } from "next/navigation";
 
 export default function TestUserLogin() {
@@ -38,7 +38,7 @@ export default function TestUserLogin() {
       <ul className="flex flex-col items-center gap-4 mb-4">
         {usersData.map((user) => (
           <li key={user.name}>
-            <Button
+            <CustomButton
               label={`${user.name}, role : ${user.role}`}
               onClick={() => handleLogin(user.credentials)}
               additionalStyle="mx-auto"

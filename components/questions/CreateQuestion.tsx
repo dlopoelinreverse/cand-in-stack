@@ -1,7 +1,7 @@
 import { QuestionType } from "@/app/types/types";
 import Questions from "./Questions";
 import { useState } from "react";
-import Button from "../customs/Button";
+import CustomButton from "../customs/CustomButton";
 import { nanoid } from "nanoid";
 
 interface CreateQuestionProps {
@@ -49,7 +49,10 @@ export default function CreateQuestion({
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        <Button label="Ajouter la question" onClick={handleCreateQuestion} />
+        <CustomButton
+          label="Ajouter la question"
+          onClick={handleCreateQuestion}
+        />
       </div>
     </div>
   );

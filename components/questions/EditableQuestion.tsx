@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Question from "./Question";
 import { QuestionType } from "@/app/types/types";
-import Button from "../customs/Button";
+import CustomButton from "../customs/CustomButton";
 
 interface EditableQuestionProps {
   question: QuestionType;
@@ -33,12 +33,12 @@ export default function EditableQuestion({
             defaultValue={question.content}
             onChange={(e) => setEditedContent(e.target.value)}
           />
-          <Button
+          <CustomButton
             label="Editer"
             disabled={editedContent.length <= 0}
             onClick={handleEdit}
           />
-          <Button
+          <CustomButton
             label="Annuler"
             onClick={() => setIsEditing((current) => !current)}
           />
@@ -46,7 +46,7 @@ export default function EditableQuestion({
       ) : (
         <div className="flex justify-between w-full gap-2">
           <Question question={question} />
-          <Button
+          <CustomButton
             label="Edit"
             onClick={() => setIsEditing((current) => !current)}
           />

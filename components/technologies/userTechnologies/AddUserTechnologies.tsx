@@ -1,4 +1,4 @@
-import Button from "@/components/customs/Button";
+import CustomButton from "@/components/customs/CustomButton";
 import React, { useState } from "react";
 import AddTechnologies from "../AddTechnologies";
 import { UseMutationResult } from "@tanstack/react-query";
@@ -26,8 +26,8 @@ export default function AddUserTechnologies({
         setTechnologiesIds={setUserTechnologiesIds}
       />
       <div className="flex justify-center gap-5">
-        <Button label="Valider" onClick={handeUpdateUserTechnologies} />
-        <Button
+        <CustomButton label="Valider" onClick={handeUpdateUserTechnologies} />
+        <CustomButton
           label="Annuler"
           onClick={() => setUserTechnologiesIds(userTechnologies)}
           secondary

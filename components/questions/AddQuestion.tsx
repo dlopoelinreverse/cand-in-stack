@@ -1,7 +1,7 @@
 "use client";
 
 import { QuestionType } from "@/app/types/types";
-import Button from "../customs/Button";
+import CustomButton from "../customs/CustomButton";
 import { useState } from "react";
 import { nanoid } from "nanoid";
 
@@ -30,15 +30,15 @@ export default function AddQuestion({ addQuestion }: AddQuestionProps) {
             onChange={(e) => setContent(e.target.value)}
           />
           <div className="flex justify-center gap-2 mb-4">
-            <Button label="Ajouter" onClick={handleAddQuestion} />
-            <Button
+            <CustomButton label="Ajouter" onClick={handleAddQuestion} />
+            <CustomButton
               label="Annuler"
               onClick={() => setIsAdd((current) => !current)}
             />
           </div>
         </div>
       ) : (
-        <Button
+        <CustomButton
           label="Ajouter une question"
           onClick={() => setIsAdd((current) => !current)}
           additionalStyle="mx-auto mb-4"

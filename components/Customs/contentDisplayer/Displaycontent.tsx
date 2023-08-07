@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import Button from "../Button";
+import CustomButton from "../CustomButton";
 import { ContentElement } from "./ContentDisplayer";
 import EditableContent from "./EditableContent";
 
@@ -35,7 +35,7 @@ export default function DisplayContent({
   return (
     <div>
       {isEditable && (
-        <Button
+        <CustomButton
           label={isEditing ? "Annuler" : "Editer"}
           onClick={() => setIsEditing((current) => !current)}
         />

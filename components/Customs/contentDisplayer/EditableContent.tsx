@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import { ContentElement } from "./ContentDisplayer";
-import Button from "../Button";
+import CustomButton from "../CustomButton";
 
 export default function EditableContent({
   contentElements,
@@ -40,7 +40,7 @@ export default function EditableContent({
           className={element.className}
         />
       ))}
-      <Button
+      <CustomButton
         label="Éditer le contenu"
         onClick={() => updateData(updatedData)}
         additionalStyle="mx-auto"

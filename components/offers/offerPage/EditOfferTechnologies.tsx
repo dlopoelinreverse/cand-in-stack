@@ -1,5 +1,5 @@
 import { Offer } from "@/app/types/types";
-import Button from "@/components/customs/Button";
+import CustomButton from "@/components/customs/CustomButton";
 import AddTechnologies from "@/components/technologies/AddTechnologies";
 import DisplayTechnologies from "@/components/technologies/DisplayTechnologies";
 import { useState } from "react";
@@ -21,7 +21,7 @@ export default function EditOfferTechnologies({
   };
   return (
     <div className="flex flex-col items-center gap-4">
-      <Button
+      <CustomButton
         label={isEditing ? "Annuler" : "Editer les technologies"}
         onClick={handleEditToggle}
       />

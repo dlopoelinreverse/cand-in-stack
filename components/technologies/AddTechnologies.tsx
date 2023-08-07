@@ -5,7 +5,7 @@ import { useModal } from "@/hooks/useModal";
 import { Category, Technology } from "@/app/types/types";
 import CategoryAccordion from "./CategoryAccordion";
 import DisplayTechnologies from "./DisplayTechnologies";
-import Button from "../customs/Button";
+import CustomButton from "../customs/CustomButton";
 
 interface AddTechnologiesProps {
   technologiesIds: string[];
@@ -45,7 +45,7 @@ export default function AddTechnologies({
         onClick={handleRemoveTechnology}
         technologiesIds={technologiesIds}
       />
-      <Button
+      <CustomButton
         label={` Ajouter 
         ${
           technologiesIds.length > 0
@@ -75,8 +75,8 @@ export default function AddTechnologies({
             />
           ))}
           <div className="flex justify-center gap-5 mx-auto ">
-            <Button label="Valider" onClick={handleValidation} />
-            <Button label="Annuler" onClick={handleCancel} />
+            <CustomButton label="Valider" onClick={handleValidation} />
+            <CustomButton label="Annuler" onClick={handleCancel} />
           </div>
         </div>
       </MyModal>

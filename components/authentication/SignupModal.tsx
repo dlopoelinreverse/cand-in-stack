@@ -1,7 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import React, { useState } from "react";
-import Button from "../customs/Button";
+import CustomButton from "../customs/CustomButton";
 import axios from "axios";
 
 export default function SignupModal({
@@ -51,8 +51,8 @@ export default function SignupModal({
       {/* <label htmlFor="confirmPassword">Confirmer votre mot de passe</label>
       <input type="password" id="confirmPassword" className="p-2 rounded-md" /> */}
       <div className="flex flex-col gap-3 mt-3 ">
-        <Button label="S'inscrire" type="submit" />
-        <Button
+        <CustomButton label="S'inscrire" type="submit" />
+        <CustomButton
           label="S'inscrire avec Google"
           onClick={() => signIn("google")}
         />

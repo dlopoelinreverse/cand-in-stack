@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Button from "../customs/Button";
+import CustomButton from "../customs/CustomButton";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -40,8 +40,8 @@ export default function SigninModal({
         onChange={(e) => setData({ ...data, password: e.target.value })}
       />
       <div className="flex flex-col gap-3 mt-3 ">
-        <Button label="Se connecter" type="submit" />
-        <Button
+        <CustomButton label="Se connecter" type="submit" />
+        <CustomButton
           label="Se connecter avec Google"
           onClick={() => signIn("google")}
         />

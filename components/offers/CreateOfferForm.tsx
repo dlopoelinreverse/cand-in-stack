@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import AddTechnologies from "../technologies/AddTechnologies";
 import Checkboxes from "../customs/Checkboxes";
-import Button from "../customs/Button";
+import CustomButton from "../customs/CustomButton";
 import { useRouter } from "next/navigation";
 import useEnterpriseOffers from "@/hooks/useEnterpriseOffers";
 import { QuestionType } from "@/app/types/types";
@@ -89,8 +89,12 @@ export default function CreateOfferForm({ userId }: { userId: string }) {
           setTechnologiesIds={setTechnologiesOfferIds}
         />
         <div className="flex justify-end gap-5 mt-6">
-          <Button label="Créer une offre" type="submit" />
-          <Button label="Annuler" secondary onClick={() => router.push("/")} />
+          <CustomButton label="Créer une offre" type="submit" />
+          <CustomButton
+            label="Annuler"
+            secondary
+            onClick={() => router.push("/")}
+          />
         </div>
       </form>
     </div>

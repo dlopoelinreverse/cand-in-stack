@@ -1,13 +1,13 @@
 "use client";
 
 import { AnswerType, Offer } from "@/app/types/types";
-import Button from "../customs/Button";
 import MyModal from "../Modals/MyModal";
 import { useModal } from "@/hooks/useModal";
 import Questions from "../questions/Questions";
 import { useEffect, useState } from "react";
 import useCandidateApply from "@/hooks/useCandiateApply";
 import { redirect, useRouter } from "next/navigation";
+import CustomButton from "../customs/CustomButton";
 
 interface ApplyOnOffer {
   offer: Offer;
@@ -44,7 +44,7 @@ export default function ApplyOnOffer({ offer }: ApplyOnOffer) {
 
   return (
     <div>
-      <Button
+      <CustomButton
         label="Candidater"
         onClick={onOpenModal}
         disabled={isAlereadyApplied}
@@ -58,8 +58,8 @@ export default function ApplyOnOffer({ offer }: ApplyOnOffer) {
             setAnswers={setAnswers}
           />
           <div className="flex justify-between gap-6 my-5">
-            <Button label="Candidater" onClick={handleApplication} />
-            <Button label="Annuler" secondary onClick={handleCancel} />
+            <CustomButton label="Candidater" onClick={handleApplication} />
+            <CustomButton label="Annuler" secondary onClick={handleCancel} />
           </div>
         </>
       </MyModal>

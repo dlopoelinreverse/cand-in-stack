@@ -1,52 +1,37 @@
 "use client";
 
-interface CustomButtonProps {
-  buttonType?: string;
-  actionLabel: string | React.ReactElement;
-  secondary?: boolean;
-  fullWidth?: boolean;
-  large?: boolean;
+import { useState } from "react";
+
+interface ButtonProps {
+  label: string;
   onClick?: () => void;
   disabled?: boolean;
-  outline?: boolean;
-  additionnalStyle?: string;
+  type?: "button" | "submit" | "reset";
+  secondary?: boolean;
+  additionalStyle?: string;
 }
 
 export default function CustomButton({
-  buttonType,
-  actionLabel,
-  secondary,
-  fullWidth,
-  large,
+  label,
   onClick,
   disabled,
-  outline,
-  additionnalStyle,
-}: CustomButtonProps) {
+  type = "button",
+  secondary,
+  additionalStyle,
+}: ButtonProps) {
+  const [isHover, setIsHover] = useState(false);
   return (
     <button
-      type={buttonType === "submit" ? "submit" : "button"}
-      disabled={disabled}
       onClick={onClick}
-      className={`
-disabled:opacity-70
-disabled:cursor-not-allowed
-rounded-full
-hover:opacity-80
-transition
-border-2 
-${fullWidth ? "w-full" : "w-fit"}
-${secondary ? "bg-blue-200" : "bg-blue-400"}
-${secondary ? "border-blue-200" : "border-blue-400"}
-${large ? "text-xl" : "text-md"}
-${large ? "px-5" : "px-4"}
-${large ? "py-3" : "py-2"}
-${outline ? "bg-transparent" : ""}
-${outline ? "border-blue-400" : ""}
-${additionnalStyle}
-`}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      type={type}
+      disabled={disabled}
+      className={`px-3 py-2 rounded-xl hover:opacity-50 disabled:hover:opacity-100 disabled:bg-slate-100 disabled:text-gray-400 transition ${
+        secondary ? "bg-slate-200" : "bg-slate-300"
+      } ${disabled && "opacity-20"} ${additionalStyle}`}
     >
-      {actionLabel}
+      {label}
     </button>
   );
 }
