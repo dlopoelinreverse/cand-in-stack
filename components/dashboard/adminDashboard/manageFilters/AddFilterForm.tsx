@@ -15,7 +15,6 @@ export default function AddFilterForm({ cancel }: AddFilterFormProps) {
   const { categories, addTechnology } = useTechnology();
   const handleSumbit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(newTechnologyData);
     addTechnology.mutate(newTechnologyData);
   };
   return (
