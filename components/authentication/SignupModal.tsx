@@ -46,7 +46,7 @@ export default function SignupModal() {
         disabled={isFormDisabled}
         className="p-2 rounded-md"
       />
-      <div className="flex justify-between gap-3 mt-3 ">
+      <div className="flex flex-col gap-3 mt-3 ">
         <Button label="S'inscrire" type="submit" />
         <Button
           label="S'inscrire avec Google"

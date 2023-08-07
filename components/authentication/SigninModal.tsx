@@ -25,7 +25,7 @@ export default function SigninModal() {
         disabled={isFormDisabled}
         className="p-2 rounded-md"
       />
-      <div className="flex justify-between gap-3 mt-3 ">
+      <div className="flex flex-col gap-3 mt-3 ">
         <Button label="Se connecter" type="submit" />
         <Button
           label="Se connecter avec Google"

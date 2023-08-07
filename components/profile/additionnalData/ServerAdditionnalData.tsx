@@ -1,13 +1,13 @@
 import { prisma } from "@/app/libs/prismadb";
 import AdditionnalData from "./AdditionnalData";
-import { AnswerType } from "@/app/types/types";
+import { AnswerType, ApplyStatus } from "@/app/types/types";
 
 export type AdditionnalApplyDataType = {
   id: string;
   offerTitle: string;
   answers: AnswerType[];
   createdAt: Date;
-  enterpriseStatus: "sent" | "unread" | "ongoing" | "acepted" | "rejected";
+  enterpriseStatus: ApplyStatus;
 };
 
 export const getCandidatesAppliesData = async (candidateId: string) => {

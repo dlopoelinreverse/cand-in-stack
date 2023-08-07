@@ -1,5 +1,7 @@
+import { ApplyStatus } from "@/app/types/types";
+
 interface StatusBadgeProps {
-  status: "sent" | "unread" | "ongoing" | "acepted" | "rejected";
+  status: ApplyStatus;
 }
 
 export default function StatusBadge({ status }: StatusBadgeProps) {
@@ -9,6 +11,7 @@ export default function StatusBadge({ status }: StatusBadgeProps) {
     ongoing: "bg-sky-300",
     acepted: "bg-green-300",
     rejected: "bg-red-300",
+    interesting: "bg-slate-300",
   };
   const text = {
     sent: "Envoyée",
@@ -16,6 +19,7 @@ export default function StatusBadge({ status }: StatusBadgeProps) {
     ongoing: "En cours de traitement",
     acepted: "Acceptée",
     rejected: "Rejetée",
+    interesting: "Intéressante",
   };
   return (
     <div className="container flex">

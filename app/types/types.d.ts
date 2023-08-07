@@ -27,16 +27,22 @@ export type ApplyType = {
   candidateId: string;
   offerId: string;
   answers: Prisma.Json[] | AnswerType[];
-  candidateStatus: string;
-  enterpriseStatus: string;
-  // candidateStatus: "sent" | "ongoing" | "rejected";
-  // enterpriseStatus: "unread" | "ongoing" | "rejected";
+  candidateStatus: ApplyStatus;
+  enterpriseStatus: ApplyStatus;
   offerTitle: string;
   technologiesIds: string[];
   enterpriseName: string;
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type ApplyStatus =
+  | "sent"
+  | "unread"
+  | "ongoing"
+  | "acepted"
+  | "rejected"
+  | "interesting";
 
 export type ApplyOfferData = {
   title: string;

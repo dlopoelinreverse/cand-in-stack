@@ -20,7 +20,7 @@ export default function AuthButton() {
 
   return (
     <>
-      <div className="flex justify-between w-1/4 px-3">
+      <div className="flex justify-between w-1/4 gap-3 px-3">
         <Button label="S'inscrire" onClick={handleSignup} />
         <Button label="Se connecter" onClick={handleSignin} />
       </div>

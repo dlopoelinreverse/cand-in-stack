@@ -21,7 +21,7 @@ export default function AuthModal({
 }: AuthModalProps) {
   return (
     <MyModal isOpen={modalOpen} onClose={onCloseModal}>
-      <div className="flex flex-col items-center p-5">
+      <div className="flex flex-col items-center w-full p-5">
         {contentType === "signup" && (
           <>
             <SignupModal />
