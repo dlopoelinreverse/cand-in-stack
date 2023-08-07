@@ -8,23 +8,54 @@ import UserTechnologies from "../technologies/userTechnologies/UserTechnologies"
 
 interface ProfileProps {
   userServerData: User;
+  profileUserRole: string;
 }
 
-export default async function Profile({ userServerData }: ProfileProps) {
+export default async function Profile({
+  userServerData,
+  profileUserRole,
+}: ProfileProps) {
   const session = await getServerSession(authOptions);
 
   const isCurrentUser = session?.user?.id === userServerData.id;
 
-  if (userServerData.role === "ENTERPRISE") {
+  if (
+    userServerData.role === "ENTERPRISE" ||
+    profileUserRole === "ENTERPRISE"
+  ) {
     const enterpriseOffers = await prisma.offer.findMany({
       where: { creatorId: userServerData.id },
       take: 10,
       orderBy: { createdAt: "desc" },
     });
+
+    if (profileUserRole === "ENTERPRISE") {
+      console.log("coucou");
+      return (
+        <div className="flex">
+          <div className="w-2/3">
+            <OffersDisplay
+              offers={enterpriseOffers}
+              usage="enterpriseProfile"
+            />
+          </div>
+          <div className="w-1/3">
+            <ProfileData
+              userServerData={userServerData}
+              isCurrentUser={isCurrentUser}
+            />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="flex">
         <div className="w-2/3">
-          <OffersDisplay offers={enterpriseOffers} />
+          <OffersDisplay
+            offers={enterpriseOffers}
+            enterpriseId={userServerData.id}
+          />
         </div>
         <div className="w-1/3">
           <ProfileData

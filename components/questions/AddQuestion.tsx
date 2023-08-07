@@ -22,23 +22,26 @@ export default function AddQuestion({ addQuestion }: AddQuestionProps) {
   return (
     <>
       {isAdd ? (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col w-full gap-2">
           <label htmlFor="newQuestion">Nouvelle question :</label>
           <textarea
             id="newQuestion"
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
-          <Button label="Ajouter" onClick={handleAddQuestion} />
-          <Button
-            label="Annuler"
-            onClick={() => setIsAdd((current) => !current)}
-          />
+          <div className="flex justify-center gap-2 mb-4">
+            <Button label="Ajouter" onClick={handleAddQuestion} />
+            <Button
+              label="Annuler"
+              onClick={() => setIsAdd((current) => !current)}
+            />
+          </div>
         </div>
       ) : (
         <Button
           label="Ajouter une question"
           onClick={() => setIsAdd((current) => !current)}
+          additionalStyle="mx-auto mb-4"
         />
       )}
     </>

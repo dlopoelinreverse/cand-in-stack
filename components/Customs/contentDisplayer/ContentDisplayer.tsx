@@ -1,4 +1,4 @@
-import DisplayContent from "./Displaycontent";
+import DisplayContent from "./DisplayContent";
 
 interface ContentDisplayerProps {
   contentElements: ContentElement[];

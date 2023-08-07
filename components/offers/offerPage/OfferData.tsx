@@ -48,12 +48,29 @@ export default function OfferData({
         isEdited: false,
         editedValue: "",
       },
-      className: "",
+      className: "my-2",
+    },
+    {
+      key: nanoid(),
+      label: {
+        htmlFor: "description",
+        content: "Description : ",
+      },
+      elementLength: "long",
+      elementType: "text",
+      value: offerData.title,
+      editedElement: {
+        isEdited: false,
+        editedValue: "",
+      },
+      className: "my-2",
     },
   ];
+
   const handleUpdateOfferData = (updatedData: {}) => {
     updateOffer.mutate(updatedData);
   };
+
   const handleEditQuestions = (editedQuestion: QuestionType) => {
     const questions = offerData.questions;
     const editedQuestions = questions.map((question) => {
@@ -62,13 +79,15 @@ export default function OfferData({
     });
     updateOffer.mutate({ questions: editedQuestions });
   };
+
   const handleAddQuestion = (newQuestion: QuestionType) => {
     let offerQuestions = { questions: [...offerData.questions] };
     offerQuestions.questions.push(newQuestion);
     updateOffer.mutate(offerQuestions);
   };
+
   return (
-    <div className="">
+    <div>
       <ContentDisplayer
         contentElements={contentOffer}
         isEditable={isCurrentEnterpriseOffer}
@@ -76,7 +95,7 @@ export default function OfferData({
         onSuccessUpdate={updateOffer.isSuccess}
       />
       {isCurrentEnterpriseOffer ? (
-        <>
+        <div className="flex flex-col items-center gap-2 mb-2">
           <Questions
             usage="addEdit"
             questionsOffer={offerData.questions}
@@ -84,12 +103,12 @@ export default function OfferData({
             addQuestion={handleAddQuestion}
           />
           <EditOfferTechnologies offerData={offerData} />
-        </>
+        </div>
       ) : (
-        <>
+        <div className="flex flex-col items-center gap-2 mb-2">
           <Questions usage="displaying" questionsOffer={offerData.questions} />
           <DisplayTechnologies technologiesIds={offer.technologiesIds} />
-        </>
+        </div>
       )}
       {userRole === "USER" && isAuthenticatedUser && (
         <ApplyOnOffer offer={offer} />

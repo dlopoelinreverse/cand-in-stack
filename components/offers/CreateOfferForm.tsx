@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddTechnologies from "../technologies/AddTechnologies";
 import Checkboxes from "../customs/Checkboxes";
 import Button from "../customs/Button";
@@ -39,6 +39,13 @@ export default function CreateOfferForm({ userId }: { userId: string }) {
     };
     addEnterpriseOffer.mutate({ enterpriseId: userId, newOfferData });
   };
+
+  useEffect(() => {
+    if (addEnterpriseOffer.isSuccess) {
+      router.refresh();
+    }
+  }, [addEnterpriseOffer.isSuccess, router]);
+
   return (
     <div className="w-3/5 mx-auto mb-10 ">
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-5">

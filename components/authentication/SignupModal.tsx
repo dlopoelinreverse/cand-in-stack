@@ -2,50 +2,54 @@
 import { signIn } from "next-auth/react";
 import React, { useState } from "react";
 import Button from "../customs/Button";
+import axios from "axios";
 
-export default function SignupModal() {
-  const [isFormDisabled, setIsFormDisabled] = useState(false);
+export default function SignupModal({
+  onCloseModal,
+}: {
+  onCloseModal: () => void;
+}) {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
   const onSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
-    // register logic
+    axios
+      .post("/api/register", data)
+      .then(() => onCloseModal())
+      .catch(() => alert("An error occurred !"));
   };
   return (
     <form onSubmit={onSubmit} className="flex flex-col w-1/2 gap-3 ">
-      <label htmlFor="firstname">Votre prénom</label>
-      <input
-        type="text"
-        id="firstname"
-        disabled={isFormDisabled}
-        className="p-2 rounded-md"
-      />
       <label htmlFor="lastname">Votre nom</label>
       <input
-        type="email"
+        type="text"
         id="lastname"
-        disabled={isFormDisabled}
         className="p-2 rounded-md"
+        value={data.name}
+        onChange={(e) => setData({ ...data, name: e.target.value })}
       />
       <label htmlFor="email">Votre email</label>
       <input
         type="email"
         id="email"
-        disabled={isFormDisabled}
         className="p-2 rounded-md"
+        value={data.email}
+        onChange={(e) => setData({ ...data, email: e.target.value })}
       />
       <label htmlFor="password">Votre mot de passe</label>
       <input
         type="password"
         id="password"
-        disabled={isFormDisabled}
         className="p-1"
+        value={data.password}
+        onChange={(e) => setData({ ...data, password: e.target.value })}
       />
-      <label htmlFor="confirmPassword">Confirmer votre mot de passe</label>
-      <input
-        type="password"
-        id="confirmPassword"
-        disabled={isFormDisabled}
-        className="p-2 rounded-md"
-      />
+      {/* <label htmlFor="confirmPassword">Confirmer votre mot de passe</label>
+      <input type="password" id="confirmPassword" className="p-2 rounded-md" /> */}
       <div className="flex flex-col gap-3 mt-3 ">
         <Button label="S'inscrire" type="submit" />
         <Button

@@ -27,7 +27,7 @@ export default function EnterpriseOffers({
         <OfferCard>
           <>
             <h3>Ajouter une offre</h3>
-            <Link href="/offers/create">+</Link>
+            <p>+</p>
           </>
         </OfferCard>
       ) : (
@@ -35,7 +35,7 @@ export default function EnterpriseOffers({
           <OfferCard>
             <>
               <h3>Ajouter une offre</h3>
-              <Link href="/offers/create">+</Link>
+              <p>+</p>
             </>
           </OfferCard>
           {enterpriseOffers?.map((offer: Offer) => (

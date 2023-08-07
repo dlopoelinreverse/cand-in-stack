@@ -39,7 +39,7 @@ export default function AddTechnologies({
     );
   };
   return (
-    <div className="mx-auto mt-3">
+    <div className="mx-auto">
       <DisplayTechnologies
         typeAction="removing"
         onClick={handleRemoveTechnology}

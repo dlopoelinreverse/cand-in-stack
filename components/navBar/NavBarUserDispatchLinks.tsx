@@ -41,11 +41,11 @@ export default async function NavBarUserDispatchLinks() {
           title: "Mes Candidats",
           targetSegment: "candidates",
         },
-        {
-          href: "/dashboard",
-          title: "Tableau de bord",
-          targetSegment: "dashboard",
-        },
+        // {
+        //   href: "/dashboard",
+        //   title: "Tableau de bord",
+        //   targetSegment: "dashboard",
+        // },
       ],
     },
     {

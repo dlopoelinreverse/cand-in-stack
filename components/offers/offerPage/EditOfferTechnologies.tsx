@@ -20,7 +20,7 @@ export default function EditOfferTechnologies({
     isEditing && setTechnologiesIds(offerData.technologiesIds);
   };
   return (
-    <div>
+    <div className="flex flex-col items-center gap-4">
       <Button
         label={isEditing ? "Annuler" : "Editer les technologies"}
         onClick={handleEditToggle}

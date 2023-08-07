@@ -28,7 +28,6 @@ export default function EditableContent({
 
   return (
     <form className="flex flex-col">
-      <pre>{JSON.stringify(updatedData)}</pre>
       {contentElements.map((element) => (
         <Element
           key={element.key}
@@ -41,7 +40,11 @@ export default function EditableContent({
           className={element.className}
         />
       ))}
-      <Button label="test" onClick={() => updateData(updatedData)} />
+      <Button
+        label="Éditer le contenu"
+        onClick={() => updateData(updatedData)}
+        additionalStyle="mx-auto"
+      />
     </form>
   );
 }

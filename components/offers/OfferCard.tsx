@@ -8,23 +8,23 @@ interface OfferCardProps {
 }
 
 export default function OfferCard({ offer, children }: OfferCardProps) {
+  if (!offer)
+    return (
+      <Link
+        href="/offers/create"
+        className="flex flex-col min-h-[200px] rounded-lg justify-center items-center border-2 border-slate-200 w-[30%] p-5 hover:bg-slate-100 hover:shadow-md"
+      >
+        {children}
+      </Link>
+    );
   return (
-    <li className="flex flex-col min-h-[300px] justify-center items-center w-[30%] p-5 bg-slate-200">
-      {!offer ? (
-        children
-      ) : (
-        <>
-          <h3>{offer.title}</h3>
-          <DisplayTechnologies technologiesIds={offer.technologiesIds} />
-          <p>{offer.description}</p>
-          <Link
-            href={`/offers/${offer.id}`}
-            className="px-3 py-2 transition rounded-xl hover:opacity-50 bg-slate-300"
-          >
-            Offre
-          </Link>
-        </>
-      )}
-    </li>
+    <Link
+      href={`/offers/${offer.id}`}
+      className="flex flex-col min-h-[200px] rounded-lg justify-center items-center border-2 border-slate-200 w-[30%] p-5 hover:bg-slate-100 hover:shadow-md"
+    >
+      <h3>{offer.title}</h3>
+      <DisplayTechnologies technologiesIds={offer.technologiesIds} />
+      <p>{offer.description}</p>
+    </Link>
   );
 }

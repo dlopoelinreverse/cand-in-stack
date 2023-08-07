@@ -4,6 +4,7 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
+import bcrypt from "bcrypt";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -15,25 +16,42 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
-    // CredentialsProvider({
-    //   name: "Sign in",
-    //   email: {
-    //     label: "Email",
-    //     type: "email",
-    //     placeholder: "example@example.com",
-    //   },
-    //   password: { label: "Password", type: "password" },
-    //   async authorize(credentials) {
-    //     if (!credentials || !credentials.email || !credentials.password)
-    //       return null;
-    //     const dbUser = await prisma.user.findFirst({
-    //       where: { email: credentials.email },
-    //     });
-    //     // if (dbUser && dbUser.password === credentials.password)
-    //   },
-    // }),
-  ],
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "exemple@email.com",
+        },
+        password: { label: "Mot de passe", type: "password" },
+        username: {
+          label: "Nom d'utilisateur",
+          type: "text",
+          placeholder: "Eric Dupont",
+        },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials.password)
+          throw new Error("Pleae enter an email and password");
 
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email },
+        });
+
+        if (!user || !user?.hashedPassword) throw new Error("No user found");
+
+        const passwordMatch = await bcrypt.compare(
+          credentials.password,
+          user.hashedPassword
+        );
+
+        if (!passwordMatch) throw new Error("Incorrect password");
+
+        return user as any;
+      },
+    }),
+  ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) token.role = user.role;

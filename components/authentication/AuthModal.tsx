@@ -3,6 +3,7 @@ import MyModal from "../Modals/MyModal";
 import SigninModal from "./SigninModal";
 import SignupModal from "./SignupModal";
 import { useSession } from "next-auth/react";
+import TestUserLogin from "./TestUserLogin";
 
 interface AuthModalProps {
   modalOpen: boolean;
@@ -24,7 +25,7 @@ export default function AuthModal({
       <div className="flex flex-col items-center w-full p-5">
         {contentType === "signup" && (
           <>
-            <SignupModal />
+            <SignupModal onCloseModal={onCloseModal} />
             <p className="mt-3">
               Vous avez déjà un compte ?{" "}
               <span
@@ -38,7 +39,8 @@ export default function AuthModal({
         )}
         {contentType === "signin" && (
           <>
-            <SigninModal />
+            <TestUserLogin />
+            <SigninModal onCloseModal={onCloseModal} />
             <p className="mt-3">
               Vous n&apos;avez pas encore de compte ?{" "}
               <span

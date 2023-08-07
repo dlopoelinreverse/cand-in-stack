@@ -19,5 +19,9 @@ export default async function UserProfile({
 
   if (!userData) return;
 
-  return <Profile userServerData={userData} />;
+  const profileUserRole = userData.role;
+
+  return (
+    <Profile userServerData={userData} profileUserRole={profileUserRole} />
+  );
 }
