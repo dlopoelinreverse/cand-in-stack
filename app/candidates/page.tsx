@@ -5,9 +5,7 @@ import { prisma } from "../libs/prismadb";
 import DataTable from "@/components/customs/DataTable";
 import { offersColumns } from "@/components/candidates/OffersColumns";
 
-export const getEnterpriseOffersWithAppliesData = async (
-  enterpriseId: string
-) => {
+const getEnterpriseOffersWithAppliesData = async (enterpriseId: string) => {
   const enterpriseOffersData = await prisma.offer.findMany({
     where: { creatorId: enterpriseId },
     select: {
