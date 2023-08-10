@@ -1,5 +1,4 @@
 "use client";
-// error
 
 import { AnswerType, Offer } from "@/app/types/types";
 import MyModal from "../Modals/MyModal";

@@ -1,5 +1,4 @@
 "use client";
-// error
 
 interface ButtonProps {
   label: string;
