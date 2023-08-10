@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { ContentElement } from "./ContentDisplayer";
+// @ts-ignore
 import CustomButton from "../CustomButton";
 
 export default function EditableContent({
