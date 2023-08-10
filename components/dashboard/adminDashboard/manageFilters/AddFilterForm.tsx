@@ -32,7 +32,7 @@ export default function AddFilterForm({ cancel }: AddFilterFormProps) {
         <option value="default" disabled>
           ---sélectionner une catégorie---
         </option>
-        {categories?.map((category) => (
+        {categories?.map((category: any) => (
           <option value={category.id} key={category.id}>
             {category.name}
           </option>
