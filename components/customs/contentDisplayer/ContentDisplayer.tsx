@@ -1,3 +1,4 @@
+// @ts-ignore
 import DisplayContent from "./DisplayContent";
 
 interface ContentDisplayerProps {
