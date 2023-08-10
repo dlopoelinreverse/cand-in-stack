@@ -19,7 +19,7 @@ export default function TechnologiesFilterModal() {
         {technos.map((techno) => (
           <CustomButton
             key={techno.id}
-            actionLabel={techno.name}
+            label={techno.name}
             onClick={() => {}}
           />
         ))}
