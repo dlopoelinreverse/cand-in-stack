@@ -2,7 +2,7 @@ import { authOptions } from "@/utils/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { prisma } from "../libs/prismadb";
-import DataTable from "@/components/customs/DataTable";
+import DataTable from "../../components/customs/DataTable";
 import { offersColumns } from "@/components/candidates/OffersColumns";
 
 const getEnterpriseOffersWithAppliesData = async (enterpriseId: string) => {
