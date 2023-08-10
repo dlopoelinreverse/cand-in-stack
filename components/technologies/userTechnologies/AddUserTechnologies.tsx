@@ -1,4 +1,4 @@
-import CustomButton from "@/components/customs/CustomButton";
+import CustomButton from "../../customs/CustomButton";
 import React, { useState } from "react";
 import AddTechnologies from "../AddTechnologies";
 import { UseMutationResult } from "@tanstack/react-query";

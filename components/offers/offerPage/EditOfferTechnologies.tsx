@@ -1,5 +1,5 @@
 import { Offer } from "@/app/types/types";
-import CustomButton from "@/components/customs/CustomButton";
+import CustomButton from "../../customs/CustomButton";
 import AddTechnologies from "@/components/technologies/AddTechnologies";
 import DisplayTechnologies from "@/components/technologies/DisplayTechnologies";
 import { useState } from "react";
