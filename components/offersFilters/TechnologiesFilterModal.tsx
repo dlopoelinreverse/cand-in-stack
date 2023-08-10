@@ -13,6 +13,7 @@ export default function TechnologiesFilterModal() {
   // map technos => button with chip "+"
   // selected filters => map selected technos => button with chip "-"
   // this gonna be retunr in to th modal
+  //
   return (
     <div>
       <ul>
