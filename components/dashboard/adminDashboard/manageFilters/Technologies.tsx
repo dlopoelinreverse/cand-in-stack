@@ -19,13 +19,15 @@ export default function Technologies() {
   return (
     <>
       <ul className="flex flex-col w-1/2 gap-3">
-        {categories.map((category) => (
+        {categories.map((category: any) => (
           <li key={category.id} className="p-5">
             {category.name}
             <ul className="flex flex-wrap gap-3">
               {technologies
-                .filter((technology) => technology.categoryId === category.id)
-                .map((technology) => (
+                .filter(
+                  (technology: any) => technology.categoryId === category.id
+                )
+                .map((technology: any) => (
                   <li key={technology.id}>{technology.name}</li>
                 ))}
             </ul>
