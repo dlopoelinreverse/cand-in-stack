@@ -1,12 +1,5 @@
 "use client";
-import {
-  ElementType,
-  FC,
-  HTMLAttributes,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { ElementType, FC, HTMLAttributes, useEffect, useState } from "react";
 import CustomButton from "../CustomButton";
 import { ContentElement } from "./ContentDisplayer";
 import EditableContent from "./EditableContent";
