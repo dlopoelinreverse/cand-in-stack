@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { prisma } from "../libs/prismadb";
 import { offersColumns } from "@/components/candidates/OffersColumns";
-import DataTable from "@/components/customs/DataTable";
+import DataTable from "@/components/candidates/candidates-data-table";
 
 const getEnterpriseOffersWithAppliesData = async (enterpriseId: string) => {
   const enterpriseOffersData = await prisma.offer.findMany({

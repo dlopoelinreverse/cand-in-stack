@@ -5,7 +5,7 @@ import React from "react";
 import { prisma } from "../libs/prismadb";
 import { appliesColumns } from "../../components/applies/appliesColumns";
 import { ApplyType } from "../types/types";
-import DataTable from "@/components/customs/DataTable";
+import DataTable from "@/components/applies/applies-data-table";
 
 export default async function Applies() {
   const session = await getServerSession(authOptions);
