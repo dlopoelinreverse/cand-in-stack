@@ -3,9 +3,9 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
 import { prisma } from "../libs/prismadb";
-import DataTable from "../../components/customs/DataTable";
 import { appliesColumns } from "../../components/applies/appliesColumns";
 import { ApplyType } from "../types/types";
+import DataTable from "@/components/customs/DataTable";
 
 export default async function Applies() {
   const session = await getServerSession(authOptions);

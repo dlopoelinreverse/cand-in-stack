@@ -2,8 +2,8 @@ import { authOptions } from "@/utils/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { prisma } from "../libs/prismadb";
-import DataTable from "../../components/customs/DataTable";
 import { offersColumns } from "@/components/candidates/OffersColumns";
+import DataTable from "@/components/customs/DataTable";
 
 const getEnterpriseOffersWithAppliesData = async (enterpriseId: string) => {
   const enterpriseOffersData = await prisma.offer.findMany({
